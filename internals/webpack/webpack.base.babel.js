@@ -24,7 +24,11 @@ module.exports = (options) => ({
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: options.babelQuery,
+          options: {
+            presets: [],
+            plugins: ["transform-object-rest-spread"]
+          }
+          // options: options.babelQuery,
         },
       },
       {
