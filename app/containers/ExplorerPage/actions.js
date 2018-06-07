@@ -6,6 +6,8 @@
 
 import {
   CHANGE_TOPIC,
+  ADD_TOPIC,
+  REMOVE_TOPIC,  
   LOAD_TOPIC,
   LOAD_TOPIC_SUCCESS,
   LOAD_TOPIC_ERROR
@@ -26,7 +28,22 @@ export function changeTopicName(position,topicName) {
   };
 }
 
+export function addTopic(topicName) {
+  return {
+    type: ADD_TOPIC,
+    topicName,
+  };
+}
+
+export function removeTopic(position) {
+  return {
+    type: REMOVE_TOPIC,
+    position,
+  };
+}
+
 export function loadTopicData(position) {
+  console.log("LOADDDDD")
   return {
     type: LOAD_TOPIC,
     position

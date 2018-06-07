@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.footer`
+const Wrapper = styled.div`
   flex: 1;
   width: 20%;
 `;

@@ -15,19 +15,21 @@ import { withRouter } from 'react-router'
 import Wrapper from "./Wrapper"
 import TopicBarTab from './TopicBarTab/index.js';
 import TopicBarInput from "./TopicBarInput/index.js"
-import TopicBarNavigation from "./TopicBarNavigation/index.js"
+
+import Button from "components/Button"
 
 export class TopicBar extends React.Component {
   onChangeThisTopic(evt) {
-    const pos = this.props.position
-    this.props.onChangeTopic(pos,evt.target.value)
+    this.props.onChangeTopic(this.props.position,evt.target.value)
+  }
+  onRemoveThisTopic(evt) {
+    this.props.onRemoveTopic(this.props.position)
   }
   render () {
     const {match} = this.props
     
     return (
       <Wrapper>
-        <TopicBarNavigation />
         <TopicBarInput
           name="chooseTopic"
           type="text"
@@ -35,8 +37,10 @@ export class TopicBar extends React.Component {
           value={this.props.topic.name}
           onChange={this.onChangeThisTopic.bind(this)}
         />
-        {match.path}
-        <Route path={`${match.path}/:topicBarId`} component={TopicBarTab} />
+        <Button onClick={this.onRemoveThisTopic.bind(this)} >
+        x
+        </Button>
+        <Route path={`${match.path}/:topicBarId`} render={()=><TopicBarTab data={this.props.topic.data} />} />
       </Wrapper>
     );
   }

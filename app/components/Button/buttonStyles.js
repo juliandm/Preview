@@ -1,8 +1,9 @@
 import { css } from 'styled-components';
 
 const buttonStyles = css`
-  display: inline-block;
   box-sizing: border-box;
+  width: 20px;
+  height: 10px;
   padding: 0.25em 2em;
   text-decoration: none;
   border-radius: 4px;

@@ -5,6 +5,8 @@
 import { createSelector } from 'reselect';
 
 const selectExplorer = (state) => state.get('explorer');
+const selectTopics = (state) => state.getIn(['explorer','topics']);
+
 
 // const makeSelectTopicData = (position) => createSelector(
 //   selectExplorer,
@@ -15,13 +17,24 @@ const selectExplorer = (state) => state.get('explorer');
 //   (explorerState) => explorerState.getIn(['topics',position,"name"])
 // );
 
-const makeSelectTopics = (position) => createSelector(
+const makeSelectTopics = () => createSelector(
   selectExplorer,
   (explorerState) => explorerState.get("topics").toJS()
 );
 
+// const makeSelectChangedTopics = () => createSelector(
+//   selectExplorer,
+//   (explorerState) => explorerState.get("topics").filter(t => t.changed).toJS()
+// );
+
+const makeSelectChangedTopics = () => createSelector(
+  selectTopics,
+  (explorerState) => explorerState.toJS().filter(t => {return t.changed})
+);
+
 export {
-  makeSelectTopics
+  makeSelectTopics,
+  makeSelectChangedTopics
   // makeSelectTopicData,
   // makeSelectTopicName,
 };

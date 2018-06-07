@@ -10,11 +10,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import {Link} from 'react-router-dom'
 import { withRouter } from 'react-router'
-
-const Wrapper = styled.footer`
-  outline: none;
-  border-bottom: 1px dotted #999;
-`;
+import Wrapper from "./Wrapper.js"
 
 function TopicBarNavigation({match}) {
   return (
@@ -28,6 +24,7 @@ function TopicBarNavigation({match}) {
         <Link to={`${match.url}/learning`}>
         Learning
         </Link>
+
     </Wrapper>
   );
 }

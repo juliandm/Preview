@@ -4,44 +4,49 @@
  *
  */
 
-import { fromJS } from 'immutable';
-
+import {topicConstructor, initialState} from "./constructors"
 import {
   LOAD_TOPIC_SUCCESS,
   LOAD_TOPIC,
   LOAD_TOPIC_ERROR,
   CHANGE_TOPIC,
+  ADD_TOPIC,
+  REMOVE_TOPIC
 } from './constants';
 
-// The initial state of the App
-const initialState = fromJS({
-  loading: false,
-  error: false,
-  currentTopic: false,
-  topics: [{"name":"Initial","data":false}]
-  // topics: {"1":{"name":false,"data":false},2:{"name":false,"data":false},"3":{"name":false,"data":false}},
-});
 
 
-function explorerPageReducer(state = initialState, action) {
+
+
+
+function explorerPageReducer(state = initialState(), action) {
   switch (action.type) {
     case CHANGE_TOPIC:
       console.log("CHANGE REDUCE NAME",action.position,action.topicName)
       return state
         .setIn(["topics",action.position,"name"], action.topicName)
+        .setIn(["topics",action.position,"changed"], true)        
+    case ADD_TOPIC:
+      console.log("ADD REDUCE TOPIC",action.topicName)
+      return state
+        .setIn(["topics",state.get("topics").size], topicConstructor(action.topicName))
+    case REMOVE_TOPIC:
+      console.log("REMOVE REDUCE TOPIC",action.topicName)
+      return state
+        .deleteIn(["topics",action.position])
     case LOAD_TOPIC:
       return state
-        .set('loading', true)
+        .setIn(["topics",action.position,"loading"], true)    
         .set('error', false)
-        .setIn(["topics",action.position,"data"], false)
     case LOAD_TOPIC_SUCCESS:
       return state
         .setIn(["topics",action.position,"data"], action.topicData)
-        .set('loading', false)
+        .setIn(["topics",action.position,"loading"], false)    
+        .setIn(["topics",action.position,"changed"], false)            
     case LOAD_TOPIC_ERROR:
       return state
         .set('error', action.error)
-        .set('loading', false);
+        .setIn(["topics",action.position,"loading"], false)    
     default:
       return state;
   }

@@ -8,7 +8,8 @@ import { topicLoaded, topicLoadingError } from 'containers/ExplorerPage/actions'
 
 // import request from 'utils/request';
 import { TopicBar } from '../../components/TopicBar';
-// import { makeSelectUsername } from 'containers/HomePage/selectors';
+import { makeSelectTopics } from 'containers/ExplorerPage/selectors';
+import {topicDataConstructor} from "./constructors"
 
 /**
  * Github repos request/response handler
@@ -16,13 +17,21 @@ import { TopicBar } from '../../components/TopicBar';
 export function* getTopicBarData() {
   // Select Topic Names from store
   const topicName = "test"
-  // const username = yield select(makeSelectUsername());
-  // const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
+  const topics = yield select(makeSelectTopics());
+  console.log("WHAT", topics)
+
 
   try {
-    // Call our request helper (see 'utils/request')
-    // const repos = yield call(request, requestURL);
-    yield put(topicLoaded(repos, topicName));
+    for (let i in topics) {
+      const topic = topics[i]
+      if (topic.changed) {
+        //REQUEST HERE
+        // const data = yield call(request, requestURL);
+        const data = topicDataConstructor({"links":[{"title":"Hwattt","author": "Hehehe"}], "stats":";)"})
+        yield put(topicLoaded(i, data));
+      }
+    }
+
   } catch (err) {
     yield put(topicLoadingError(err));
   }

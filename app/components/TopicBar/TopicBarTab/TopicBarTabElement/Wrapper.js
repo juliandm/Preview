@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.footer`
-  min-height: 200px;
+const Wrapper = styled.div`
+  min-height: 50px;
   background: white;
 `;
 
