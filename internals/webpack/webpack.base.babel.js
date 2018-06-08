@@ -118,4 +118,10 @@ module.exports = (options) => ({
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window
   performance: options.performance || {},
+  externals: {
+    // global app config object
+    config: JSON.stringify({
+        apiUrl: 'http://localhost:3000'
+    })
+}
 });

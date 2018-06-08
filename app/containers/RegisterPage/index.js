@@ -1,6 +1,6 @@
 /**
  *
- * EditorPage
+ * RegisterPage
  *
  */
 
@@ -13,29 +13,27 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectEditorPage from './selectors';
+import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 
-
-export class EditorPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class RegisterPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
         <FormattedMessage {...messages.header} />
-
       </div>
     );
   }
 }
 
-EditorPage.propTypes = {
+RegisterPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  editorpage: makeSelectEditorPage(),
+  registerpage: makeSelectRegisterPage(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -46,11 +44,11 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'editor', reducer });
-const withSaga = injectSaga({ key: 'editor', saga });
+const withReducer = injectReducer({ key: 'registerPage', reducer });
+const withSaga = injectSaga({ key: 'registerPage', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(EditorPage);
+)(RegisterPage);

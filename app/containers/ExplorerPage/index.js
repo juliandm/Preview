@@ -9,13 +9,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
+import {makeSelectTopics} from './selectors';
+
 import { compose } from 'redux';
 import styled from "styled-components"
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import {makeSelectTopics} from './selectors';
 import reducer from './reducer';
+
 import saga from './saga';
 import messages from './messages';
 
@@ -30,7 +32,6 @@ import { changeTopicName, loadTopicData, addTopic, removeTopic} from './actions'
 var topicChangeTimeout = 0
 
 export class ExplorerPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
   render() {
     const MAX_TOPICS_REACHED = this.props.topics.length === 3
     return (
@@ -75,8 +76,9 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'explorerPage', reducer });
-const withSaga = injectSaga({ key: 'explorerPage', saga });
+const withReducer = injectReducer({ key: 'explorer', reducer });
+
+const withSaga = injectSaga({ key: 'explorer', saga });
 
 export default compose(
   withReducer,

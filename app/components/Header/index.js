@@ -7,6 +7,7 @@ import NavBar from './NavBar';
 import HeaderLink from './HeaderLink';
 import Banner from './banner.jpg';
 import messages from './messages';
+import {Link} from "react-router-dom"
 
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -25,6 +26,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           <HeaderLink to="/editor">
             <FormattedMessage {...messages.editor} />
           </HeaderLink>
+          {this.props.is_authenticated && <Link to="/login" >Logout </Link>}
         </NavBar>
       </div>
     );

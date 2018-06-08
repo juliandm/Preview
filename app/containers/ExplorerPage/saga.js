@@ -11,9 +11,7 @@ import { TopicBar } from '../../components/TopicBar';
 import { makeSelectTopics } from 'containers/ExplorerPage/selectors';
 import {topicDataConstructor} from "./constructors"
 
-/**
- * Github repos request/response handler
- */
+
 export function* getTopicBarData() {
   // Select Topic Names from store
   const topicName = "test"

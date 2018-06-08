@@ -25,6 +25,21 @@ const customHost = argv.host || process.env.HOST;
 const host = customHost || null; // Let http.Server use its default IPv6/4 host
 const prettyHost = customHost || 'localhost';
 
+
+app.post('/users/authenticate', function(req, res) {
+  let users = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
+  user = users[0]
+  let responseJson = {
+    id: user.id,
+    username: user.username,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    token: 'fake-jwt-token'
+};
+  res.send(responseJson);
+});
+
+
 // Start your app.
 app.listen(port, host, (err) => {
   if (err) {

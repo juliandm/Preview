@@ -36,23 +36,23 @@ export class TopicBarTabElement extends React.Component {
       switch (this.props.id) {
         //Learning
         case "links": renderedContent = this.renderLinks(); break;
-        case "procon": renderedContent = this.renderLinks(); break;
+        case "procon": renderedContent = this.renderProcon(); break;
         case "stats": renderedContent = this.renderStats(); break;
-        case "tips": renderedContent = this.renderLinks(); break;
-        case "learningSettings": renderedContent = this.renderLinks(); break;
+        case "tips": renderedContent = this.renderTips(); break;
+        case "learningSettings": renderedContent = this.renderLearningSettings(); break;
         //Structure
-        case "uniqueParts": renderedContent = this.renderLinks(); break;
-        case "sharedParts": renderedContent = this.renderLinks(); break; 
-        case "alternatives": renderedContent = this.renderLinks(); break; 
-        case "parents": renderedContent = this.renderLinks(); break; 
-        case "structureSettings": renderedContent = this.renderLinks(); break;
+        case "uniqueParts": renderedContent = this.renderUniqueParts(); break;//
+        case "sharedParts": renderedContent = this.renderSharedParts(); break; 
+        case "alternatives": renderedContent = this.renderAlternatives(); break; 
+        case "parents": renderedContent = this.renderParents(); break; 
+        case "structureSettings": renderedContent = this.renderStructureSettings(); break;
         //Info
-        case "description": renderedContent = this.renderLinks(); break; 
-        case "attributes": renderedContent = this.renderLinks(); break; 
-        case "students": renderedContent = this.renderLinks(); break; 
-        case "experts": renderedContent = this.renderLinks(); break; 
-        case "mentors": renderedContent = this.renderLinks(); break; 
-        case "infoSettings":false
+        case "description": renderedContent = this.renderDescription(); break; 
+        case "attributes": renderedContent = this.renderAttributes(); break; 
+        case "students": renderedContent = this.renderStudents(); break; 
+        case "experts": renderedContent = this.renderExperts(); break; 
+        case "mentors": renderedContent = this.renderMentors(); break; 
+        case "infoSettings": renderedContent = this.renderInfoSettings(); break; 
       }
     }
     return (
