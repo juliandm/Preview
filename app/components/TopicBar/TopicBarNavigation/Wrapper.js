@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-flex: 1;
+  background: white;
+  display: flex;
 `;
 
 export default Wrapper;

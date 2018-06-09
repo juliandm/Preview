@@ -22,17 +22,14 @@ export const topicDataConstructor = function (data) { // data is object of all c
       tips:false,
       learningSettings:false,
       //Structure
-      uniqueParts:false,
-      sharedParts:false, 
+      parts: false, // shared and unique
       alternatives:false, 
       parents:false, 
       structureSettings:false,
       //Info
       description:false, 
       attributes:false, 
-      students:false, 
-      experts:false, 
-      mentors:false, 
+      users: false, // experts and mentors
       infoSettings:false
     }
     for (let attr in data) {

@@ -98,7 +98,7 @@ export default class App extends React.Component {
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={LoginPage} />
-          <PrivateRoute path="/explorer" component={ExplorerPage} />
+          <PrivateRoute exact path="/explorer/:topicBarId" component={ExplorerPage} />
           <PrivateRoute path="/editor" component={EditorPage} />        
           <Route component={NotFoundPage} />
         </Switch>

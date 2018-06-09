@@ -91,7 +91,6 @@ module.exports = (options) => ({
       // make fetch available
       fetch: 'exports-loader?self.fetch!whatwg-fetch',
     }),
-
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; UglifyJS will automatically
     // drop any unreachable code.
@@ -121,7 +120,7 @@ module.exports = (options) => ({
   externals: {
     // global app config object
     config: JSON.stringify({
-        apiUrl: 'http://localhost:3000'
+        apiUrl: 'http://localhost:3000',
     })
 }
 });

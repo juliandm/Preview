@@ -2,9 +2,8 @@ import { css } from 'styled-components';
 
 const buttonStyles = css`
   box-sizing: border-box;
-  width: 20px;
   height: 10px;
-  padding: 0.25em 2em;
+  padding: 0.2em 0.25em;
   text-decoration: none;
   border-radius: 4px;
   -webkit-font-smoothing: antialiased;
