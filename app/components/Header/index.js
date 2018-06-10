@@ -7,28 +7,28 @@ import NavBar from './NavBar';
 import HeaderLink from './HeaderLink';
 import Banner from './banner.jpg';
 import messages from './messages';
-import {Link} from "react-router-dom"
-
+import Button from "components/Button"
+import Wrapper from "./Wrapper"
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div>
+      <Wrapper>
         <A href="#">
           Edurata Project
         </A>
         <NavBar>
-          <HeaderLink to="/">
+          <HeaderLink exact to="/">
             <FormattedMessage {...messages.home} />
           </HeaderLink>
-          <HeaderLink to="/explorer/learning">
+          <HeaderLink to="/explorer">
             <FormattedMessage {...messages.explorer} />
           </HeaderLink>
           <HeaderLink to="/editor">
             <FormattedMessage {...messages.editor} />
           </HeaderLink>
-          {this.props.is_authenticated && <Link to="/login" >Logout </Link>}
+          {this.props.is_authenticated && <Button to="/login" onClick={()=>this.forceUpdate()}>Logout </Button>}
         </NavBar>
-      </div>
+      </Wrapper>
     );
   }
 }

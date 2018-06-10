@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  background: white;
   min-height: 100px;
 `;
 

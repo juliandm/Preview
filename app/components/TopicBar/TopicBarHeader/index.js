@@ -18,7 +18,7 @@ function TopicBarHeader({onRemoveTopic, onChange, ...rest}) {
   return (
     <Wrapper>
         <Input {...rest} onChange={onChange.bind(this)} />
-        <Button onClick={onRemoveTopic} >
+        <Button className="primary" onClick={onRemoveTopic} >
         x
         </Button>
     </Wrapper>

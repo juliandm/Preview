@@ -8,7 +8,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import {Link} from 'react-router-dom'
+import NavTab from 'components/NavTab'
 import { withRouter } from 'react-router'
 import Wrapper from "./Wrapper.js"
 import Button from "components/Button"
@@ -17,18 +17,18 @@ function TopicBarNavigation({match, MAX_TOPICS_REACHED, onAddTopic}) {
   return (
     <Wrapper>
           
-          <Link to={`/explorer/info`}>
+          <NavTab to={`/explorer/info`}>
           Info
-          </Link>
+          </NavTab>
         
-        <Link to={`/explorer/structure`}>
+        <NavTab to={`/explorer/structure`}>
         Structure
-        </Link>
+        </NavTab>
         
         
-        <Link to={`/explorer/learning`}>
+        <NavTab to={`/explorer/learning`}>
         Learning
-        </Link>
+        </NavTab>
         
         {!MAX_TOPICS_REACHED && <Button onClick={onAddTopic}>Add Topic</Button> }
 

@@ -22,6 +22,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import LoginPage from 'containers/LoginPage'
+import Wrapper from "./Wrapper"
 // import Navbar from 'components/Navbar'
 
 
@@ -88,23 +89,25 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
 //   )
 // ))
 
-export default class App extends React.Component {
+export default class App extends React.Component {// TODO redirect to old history
   render () {
-    const IS_AUTHENTICATED = localStorage.getItem('user')
+    const IS_AUTHENTICATED = localStorage.getItem('user') // TODO in store
     return (
-      <div>
+      <Wrapper>
         <Header is_authenticated={IS_AUTHENTICATED} />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={LoginPage} />
-          <PrivateRoute exact path="/explorer/:topicBarId" component={ExplorerPage} />
+          <PrivateRoute path="/explorer/:topicBarId" component={ExplorerPage} />
+          <PrivateRoute path="/explorer/" component={ExplorerPage} />          
+          
           <PrivateRoute path="/editor" component={EditorPage} />        
           <Route component={NotFoundPage} />
         </Switch>
         
         <Footer />
-      </div>
+      </Wrapper>
     );
   }
 }

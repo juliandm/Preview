@@ -10,23 +10,23 @@ import React, { Children } from 'react';
 import PropTypes from 'prop-types';
 
 import A from './A';
-import StyledButton from './StyledButton';
+import StyledLink from './StyledLink';
 import Wrapper from './Wrapper';
 
 function Button(props) {
   // Render an anchor tag
   let button = (
-    <A href={props.href} onClick={props.onClick}>
+    <A href={props.href} className="primary" onClick={props.onClick}>
       {Children.toArray(props.children)}
     </A>
   );
 
   // If the Button has a handleRoute prop, we want to render a button
-  if (props.handleRoute) {
+  if (props.to) {
     button = (
-      <StyledButton onClick={props.handleRoute}>
+      <StyledLink to={props.to} {...props} className="primary">
         {Children.toArray(props.children)}
-      </StyledButton>
+      </StyledLink>
     );
   }
 

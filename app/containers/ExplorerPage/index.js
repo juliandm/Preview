@@ -34,7 +34,6 @@ export class ExplorerPage extends React.Component { // eslint-disable-line react
   render() {
     return (
       <Wrapper>
-        {/* <FormattedMessage {...messages.header} /> */}
         <Map />
         <TopicBar topics={this.props.topics} onAddTopic={this.props.onAddTopic} onChangeTopic={this.props.onChangeTopic} onRemoveTopic={this.props.onRemoveTopic} />
       </Wrapper>

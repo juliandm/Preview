@@ -62,6 +62,7 @@ export class TopicBar extends React.Component {
       case "learning": tabs = this.renderLearning();break;
       case "info": tabs = this.renderInfo();break;      
       case "structure": tabs = this.renderStructure();break;
+      default: tabs = this.renderLearning();break;
     }
     return (
       <Wrapper>
@@ -69,6 +70,7 @@ export class TopicBar extends React.Component {
         
         <RowWrapper>
           {this.props.topics.map((topic,i)=> <TopicBarHeader
+            key={i}
             name="chooseTopic"
             type="text"
             placeholder="Hello"
