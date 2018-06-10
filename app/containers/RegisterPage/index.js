@@ -10,45 +10,76 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { reduxForm } from 'redux-form/immutable'
+import { withRouter } from "react-router-dom"
+import Field from "components/Field"
+import Button from "components/Button"
+import RowWrapper from "components/RowWrapper"
+import scorePassword from "./passwordScore"
 
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-import makeSelectRegisterPage from './selectors';
-import reducer from './reducer';
-import saga from './saga';
-import messages from './messages';
+const validate = values => {
+  const errors = {}
+  if (!values.email) {
+    errors.email = 'Required'
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+  if (!values.password) {
+    errors.password = 'Required'
+  } else {
+
+  }
+  if (!values.password) {
+    errors.repeatPassword = 'Repeat the password please'
+  } else if (values.password !== values.repeatPassword) {
+    errors.repeatPassword = "Passwords don't match!"
+  }
+  return errors
+}
+
+const warn = values => {
+  const warnings = {}
+  var score = scorePassword(values.password);
+  if (score > 80) warnings.password =  "strong";
+  if (score > 60) warnings.password =  "good";
+  if (score >= 30) warnings.password = "weak";
+  else warnings.password = "Not good enough";
+  return warnings
+}
+
+
 
 export class RegisterPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+    const {registering, userRegister, reset} = this.props
     return (
-      <div>
-        <FormattedMessage {...messages.header} />
-      </div>
-    );
+      <form>
+      <Field name="email" type="email"  label="Email" />
+      <Field name="password" type="password" label="Password" />
+      <Field name="repeatPassword" type="password" label="Repeat Password" />
+      
+      <RowWrapper>
+        <Button type="submit" disabled={registering} onClick={()=>userRegister()}>
+          Submit
+        </Button>
+        <Button type="button" disabled={registering} onClick={reset}>
+          Clear Values
+        </Button>
+      </RowWrapper>
+    </form>
+    )
   }
 }
 
 RegisterPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = createStructuredSelector({
-  registerpage: makeSelectRegisterPage(),
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-const withReducer = injectReducer({ key: 'registerPage', reducer });
-const withSaga = injectSaga({ key: 'registerPage', saga });
-
+const withReduxForm = reduxForm({
+  form:"register",
+  validate,
+  warn
+})
 export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
+  withRouter,
+  withReduxForm
 )(RegisterPage);

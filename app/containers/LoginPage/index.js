@@ -1,114 +1,63 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-import reducer from './reducers';
-import saga from './saga';
+import Button from "components/Button"
+import LoadingIndicator from "components/LoadingIndicator"
+import { reduxForm } from 'redux-form/immutable'
+import Field from "components/Field"
+import RowWrapper from "components/RowWrapper"
 import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
-import {makeSelectLoggingIn} from './selectors';
-import { loginRequest, logout } from './actions/index.js';
- 
-class LoginPage extends React.Component {
-    constructor(props) {
-        super(props);
- 
-        // reset login status
-        this.props.userLogout();
- 
-        this.state = {
-            username: '',
-            password: '',
-            submitted: false
-        };
- 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+
+const validate = values => {
+    const errors = {}
+    if (!values.email) {
+      errors.email = 'Required'
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+      errors.email = 'Invalid email address'
     }
- 
-    handleChange(e) {
-        const { name, value } = e.target;
-        this.setState({ [name]: value });
+    if (!values.password) {
+      errors.password = 'Required'
     }
- 
-    handleSubmit(e) {
-        e.preventDefault();
- 
-        this.setState({ submitted: true });
-        const { username, password } = this.state;
-        if (username && password) {
-          this.props.userLogin(username,password)
-           
-        }
+    return errors
+  }
+  
+  const warn = values => {
+    const warnings = {}
+
+    return warnings
+  } 
+
+function LoginPage ({userLogin, loggingIn,location,...rest}) {
+    const prevPath = () => {
+        const {state} = location || {"state":{"from":{"pathname":"/"}}}
+        return state.from.pathname
     }
- 
-    render() {
-        const { loggingIn } = this.props;
-        const { username, password, submitted } = this.state;
-        return (
-            <div className="col-md-6 col-md-offset-3">
-                <h2>Login</h2>
-                <form name="form" onSubmit={this.handleSubmit}>
-                    <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
-                        <label htmlFor="username">Username</label>
-                        <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange} />
-                        {submitted && !username &&
-                            <div className="help-block">Username is required</div>
-                        }
-                    </div>
-                    <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange} />
-                        {submitted && !password &&
-                            <div className="help-block">Password is required</div>
-                        }
-                    </div>
-                    <div className="form-group">
-                        <button className="btn btn-primary">Login</button>
-                        {loggingIn &&
-                            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                        }
-                    </div>
-                </form>
-            </div>
-        );
-    }
+    
+    return (
+        <form>
+        <Field name="email" type="email"  label="Email" />
+        <Field name="password" type="password" label="Password" />
+        <RowWrapper>
+            <Button type="submit" disabled={loggingIn} onClick={()=>userLogin(prevPath())}>
+            Submit
+            </Button>
+            <Button type="button" disabled={loggingIn} onClick={rest.reset}>
+            Clear Values
+            </Button>
+            <Link to="/register" >Register</Link>
+            
+        </RowWrapper>
+        </form>
+    );
 }
  
-
-function mapDispatchToProps(dispatch) {
-  return {
-    userLogin: (username, password) => dispatch(loginRequest(username, password)),
-    userLogout: () => dispatch(logout()),
-  };
-}
-
-
-// function mapStateToProps(state) {
-//   console.log(state)
-//   const { loggingIn } = state.authentication;
-//   return {
-//       loggingIn
-//   };
-// }
-
-const mapStateToProps = createStructuredSelector({
-  loggingIn: makeSelectLoggingIn(),  
-});
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-const withSaga = injectSaga({ key: 'loginPage', saga });
-const withReducer = injectReducer({ key: 'authentication', reducer });
-
+const withReduxForm = reduxForm({
+    form:"login",
+    validate,
+    warn
+  })
 export default compose(
-  withSaga,
-  withReducer,
-  withConnect,
+    withRouter,
+    withReduxForm
 )(LoginPage);
-
-
-
-// const connectedLoginPage = connect(mapStateToProps)(LoginPage);
-// export { connectedLoginPage as LoginPage };
+  

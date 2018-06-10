@@ -5,9 +5,7 @@
 import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
-// import explorerReducer from 'containers/ExplorerPage/reducer';
-// import authentication from 'containers/LoginPage/reducers';
-
+import { reducer as formReducer } from 'redux-form'
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
 /*
@@ -45,6 +43,7 @@ export default function createReducer(injectedReducers) {
   return combineReducers({
     route: routeReducer,
     language: languageProviderReducer,
+    form: formReducer,
     ...injectedReducers,
   });
 }

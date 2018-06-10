@@ -26,7 +26,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           <HeaderLink to="/editor">
             <FormattedMessage {...messages.editor} />
           </HeaderLink>
-          {this.props.is_authenticated && <Button to="/login" onClick={()=>this.forceUpdate()}>Logout </Button>}
+          {this.props.is_authenticated && <Button onClick={this.props.userLogout}>Logout </Button>}
         </NavBar>
       </Wrapper>
     );

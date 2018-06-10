@@ -21,12 +21,8 @@ const makeSelectLoginPage = () => createSelector(
   (substate) => substate.toJS()
 );
 
-const makeSelectLoggingIn = () => createSelector(
-  selectAuth,
-  (substate) =>{return substate.loggingIn} 
-);
+
 
 export default makeSelectLoginPage;
 export {
-  makeSelectLoggingIn
 };

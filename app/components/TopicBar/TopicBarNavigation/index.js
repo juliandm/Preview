@@ -17,9 +17,9 @@ function TopicBarNavigation({match, MAX_TOPICS_REACHED, onAddTopic}) {
   return (
     <Wrapper>
           
-          <NavTab to={`/explorer/info`}>
-          Info
-          </NavTab>
+        <NavTab to={`/explorer/info`}>
+        Info
+        </NavTab>
         
         <NavTab to={`/explorer/structure`}>
         Structure

@@ -17,57 +17,21 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import ExplorerPage from 'containers/ExplorerPage/Loadable';
 import EditorPage from 'containers/EditorPage/Loadable';
-// import LoginPage from 'containers/LoginPage/Loadable';
+import RegisterPage from "containers/RegisterPage/Loadable"
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import LoginPage from 'containers/LoginPage'
 import Wrapper from "./Wrapper"
-// import Navbar from 'components/Navbar'
-
-
-// const fakeAuth = {
-//   isAuthenticated: false,
-//   authenticate(cb) {
-//     this.isAuthenticated = true
-//     setTimeout(cb, 100)
-//   },
-//   signout(cb) {
-//     this.isAuthenticated = false
-//     setTimeout(cb, 100)
-//   }
-// }
-
-// const Public = () => <h3>Public</h3>
-// const Protected = () => <h3>Protected</h3>
-
-// class LoginPage extends React.Component {
-//   state = {
-//     redirectToReferrer: false
-//   }
-//   login = () => {
-//     fakeAuth.authenticate(() => {
-//       this.setState(() => ({
-//         redirectToReferrer: true
-//       }))
-//     })
-//   }
-//   render() {
-//     const { from } = this.props.location.state || { from: { pathname: '/' } }
-//     const { redirectToReferrer } = this.state
-
-//     if (redirectToReferrer === true) {
-//       return <Redirect to={from} />
-//     }
-
-//     return (
-//       <div>
-//         <p>You must log in to view the page</p>
-//         <button onClick={this.login}>Log in</button>
-//       </div>
-//     )
-//   }
-// }
+import { createStructuredSelector } from 'reselect';
+import {makeSelectLoggingIn, makeSelectLoggedIn, makeSelectLocation, makeSelectRegistering} from "./selectors"
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { loginRequest, logout, registerRequest } from './actions/index.js';
+import reducer from './reducers/index.js';
+import saga from './saga';
 
 export const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
@@ -77,28 +41,17 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
   )} />
 )
 
-// const AuthButton = withRouter(({ history }) => (
-//   fakeAuth.isAuthenticated ? (
-//     <p>
-//       Welcome! <button onClick={() => {
-//         fakeAuth.signout(() => history.push('/'))
-//       }}>Sign out</button>
-//     </p>
-//   ) : (
-//     <p>You are not logged in.</p>
-//   )
-// ))
 
-export default class App extends React.Component {// TODO redirect to old history
+class App extends React.Component {// TODO redirect to old history
   render () {
-    const IS_AUTHENTICATED = localStorage.getItem('user') // TODO in store
+    console.log(this.props.loggedIn)
     return (
       <Wrapper>
-        <Header is_authenticated={IS_AUTHENTICATED} />
+        <Header is_authenticated={this.props.loggedIn}  userLogout={this.props.userLogout} />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/register" component={LoginPage} />
+          <Route path="/login" render={()=><LoginPage userLogin={this.props.userLogin} loggingIn={this.props.loggingIn} />} />
+          <Route path="/register" render={()=><RegisterPage userRegister={this.props.userRegister} registering={this.props.registering} />} />
           <PrivateRoute path="/explorer/:topicBarId" component={ExplorerPage} />
           <PrivateRoute path="/explorer/" component={ExplorerPage} />          
           
@@ -111,3 +64,32 @@ export default class App extends React.Component {// TODO redirect to old histor
     );
   }
 }
+const mapStateToProps = createStructuredSelector({
+  location: makeSelectLocation(),  
+  loggedIn: makeSelectLoggedIn(),
+  loggingIn: makeSelectLoggingIn(),  
+  registering: makeSelectRegistering()
+});
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    userRegister: (from) => dispatch(registerRequest(from)),    
+    userLogin: (from) => dispatch(loginRequest(from)),
+    userLogout: () => dispatch(logout()),
+  };
+}
+
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+const withSaga = injectSaga({ key: 'authentication', saga });
+const withReducer = injectReducer({ key: 'authentication', reducer });
+
+
+
+export default compose(
+  withReducer,
+  withSaga,  
+  withConnect
+)(App);
