@@ -1,5 +1,5 @@
 
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, select } from 'redux-saga/effects';
 import history from 'helpers/history.js'
 import {LOGOUT, LOGIN_REQUEST, GETALL_REQUEST, REGISTER_REQUEST} from "./constants/index.js"
 import {userService} from "services"
@@ -21,13 +21,22 @@ import {
 } from "./actions"
 
 function* _register({from}) {
-  const email = makeSelectRegisterEmail;
-  const pw = makeSelectRegisterPw;
+  const pw = yield select(makeSelectRegisterPw());
+  const email = yield select(makeSelectRegisterEmail());
+  
+  console.log(email, pw)
   try {
-    const user = yield call(userService.register,[email,pw])
-    yield put(registerSuccess())
-    history.push(from)
-    yield call(history.push, from)
+    const user = yield call(userService.register,email,pw)
+    if (true) { // Check for else errors
+      yield put(registerSuccess())
+      yield put(alertSuccess("Account created"))
+      // history.push(from) // after Timeout
+      // yield call(history.push, from)
+    } else {
+      yield put(registerFailure(""))
+      yield put(alertError(""))
+    }
+
     
   } catch (error) {
     yield put(registerFailure(error))
@@ -37,13 +46,22 @@ function* _register({from}) {
 
 
 function* _login({from}) {
-  const email = makeSelectLoginEmail;
-  const pw = makeSelectLoginPw;
+  const email = yield select(makeSelectLoginEmail());
+  const pw = yield select(makeSelectLoginPw());
+  console.log(email, pw)
+  
   try {
-    const user = yield call(userService.login,[email,pw])
-    yield put(loginSuccess(user))
-    history.push(from) // Call two times because buggy?
-    yield call(history.push, from)
+    const user = yield call(userService.login,email,pw)
+    if (user.token) {
+      yield put(loginSuccess(user))
+      history.push(from) // Call two times because buggy?
+      yield call(history.push, from)
+    } else {
+      yield put(alertError("No user found"))
+      yield put(loginFailure(""))
+      
+    }
+
   } catch (error) {
     
     yield put(loginFailure(error))

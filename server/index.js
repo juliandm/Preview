@@ -11,6 +11,8 @@ const resolve = require('path').resolve;
 const app = express();
 const nanoid = require("nanoid");
 const {User} = require("./models/user")
+var bodyParser = require('body-parser')
+const bcrypt = require('bcrypt');
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
 
@@ -19,28 +21,60 @@ setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
   publicPath: '/',
 });
-var users = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
-
+var users = [];
+var loggedIn = []
 
 // get the intended host and port number, use localhost and port 3000 if not provided
 const customHost = argv.host || process.env.HOST;
 const host = customHost || null; // Let http.Server use its default IPv6/4 host
 const prettyHost = customHost || 'localhost';
 
+// parse application/json
+app.use(bodyParser.json())
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 
-app.post('/users/authenticate', function(req, res) {
-  user = users[0]
-  let responseJson = {
-    id: user.id,
-    username: user.username,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    token: nanoid(48),
-    ttl:1800000
-  };
-  res.send(responseJson);
+app.post('/users/authenticate',async function(req, res) {
+  const {email, password} = req.body
+  let response = {}
+  
+  console.log(email, password, users)
+  // Fake Search query
+  user = users.find(el=>el.email === email)
+  if (user) {
+    const PW_MATCH = await new Promise((resolve, reject) => {
+      bcrypt.compare(password, user.pw, function(err, res) {
+        if (res && !err) resolve(res)
+        else reject(err)
+      });
+    }).catch((e)=>{console.log(e)})
+    if (PW_MATCH) {
+      response = {
+        id: user.id,
+        email: user.email,
+        token: nanoid(48),
+        ttl:1800000
+      };
+    }
+  }
+
+
+
+
+  res.send(response)
 })  
 .post("/users/register",async (req, res, next) => {
+  const {email, password} = req.body
+  const hashedPassword = await new Promise((resolve, reject) => {
+    bcrypt.hash(password, 10, function(err, hash) {
+      if (err) reject(err)
+      resolve(hash)
+    });
+  })
+
+  // Fake Save DB
+  users.push({"id": nanoid(10), "pw": hashedPassword, "email":email})
+
   let responseJson = {
     success: true
   };

@@ -24,7 +24,7 @@ import Footer from 'components/Footer';
 import LoginPage from 'containers/LoginPage'
 import Wrapper from "./Wrapper"
 import { createStructuredSelector } from 'reselect';
-import {makeSelectLoggingIn, makeSelectLoggedIn, makeSelectLocation, makeSelectRegistering} from "./selectors"
+import {makeSelectLoggingIn, makeSelectLoggedIn, makeSelectLocation, makeSelectRegistering, makeSelectAlertMessage, makeSelectAlertType} from "./selectors"
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import { compose } from 'redux';
@@ -44,14 +44,13 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
 
 class App extends React.Component {// TODO redirect to old history
   render () {
-    console.log(this.props.loggedIn)
     return (
       <Wrapper>
         <Header is_authenticated={this.props.loggedIn}  userLogout={this.props.userLogout} />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/login" render={()=><LoginPage userLogin={this.props.userLogin} loggingIn={this.props.loggingIn} />} />
-          <Route path="/register" render={()=><RegisterPage userRegister={this.props.userRegister} registering={this.props.registering} />} />
+          <Route path="/login" render={()=><LoginPage alertType={this.props.alertType} alertMessage={this.props.alertMessage} userLogin={this.props.userLogin} loggingIn={this.props.loggingIn} />} />
+          <Route path="/register" render={()=><RegisterPage alertType={this.props.alertType} alertMessage={this.props.alertMessage} userRegister={this.props.userRegister} registering={this.props.registering} />} />
           <PrivateRoute path="/explorer/:topicBarId" component={ExplorerPage} />
           <PrivateRoute path="/explorer/" component={ExplorerPage} />          
           
@@ -65,6 +64,8 @@ class App extends React.Component {// TODO redirect to old history
   }
 }
 const mapStateToProps = createStructuredSelector({
+  alertType: makeSelectAlertType(),  
+  alertMessage: makeSelectAlertMessage(),    
   location: makeSelectLocation(),  
   loggedIn: makeSelectLoggedIn(),
   loggingIn: makeSelectLoggingIn(),  

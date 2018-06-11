@@ -8,11 +8,12 @@ export const userService = {
     getAll
 };
 
-function login(username, password) {
+function login(email, password) {
+    console.log(email, password)
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ email, password })
     };
 
     return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
@@ -22,17 +23,19 @@ function login(username, password) {
             if (user.token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
+
             }
 
-            return user;
+            return {user};
         });
 }
 
-function register(username, password) {
+function register(email, password) {
+    console.log(email, password)
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ email, password })
     };
 
     return fetch(`${config.apiUrl}/users/register`, requestOptions)

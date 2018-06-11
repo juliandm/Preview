@@ -51,7 +51,7 @@ const warn = values => {
 
 export class RegisterPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const {registering, userRegister, reset} = this.props
+    const {registering, userRegister, reset, alertType, alertMessage} = this.props
     return (
       <form>
       <Field name="email" type="email"  label="Email" />
@@ -65,6 +65,7 @@ export class RegisterPage extends React.Component { // eslint-disable-line react
         <Button type="button" disabled={registering} onClick={reset}>
           Clear Values
         </Button>
+        {alertMessage}
       </RowWrapper>
     </form>
     )

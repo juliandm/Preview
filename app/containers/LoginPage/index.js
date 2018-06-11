@@ -27,7 +27,7 @@ const validate = values => {
     return warnings
   } 
 
-function LoginPage ({userLogin, loggingIn,location,...rest}) {
+function LoginPage ({userLogin, loggingIn,location,alertType, alertMessage, ...rest}) {
     const prevPath = () => {
         const {state} = location || {"state":{"from":{"pathname":"/"}}}
         return state.from.pathname
@@ -44,8 +44,8 @@ function LoginPage ({userLogin, loggingIn,location,...rest}) {
             <Button type="button" disabled={loggingIn} onClick={rest.reset}>
             Clear Values
             </Button>
-            <Link to="/register" >Register</Link>
-            
+            <Link to="/register" >Login</Link>
+            <div>{alertMessage}</div>
         </RowWrapper>
         </form>
     );
