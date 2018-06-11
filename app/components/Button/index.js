@@ -8,15 +8,16 @@
 
 import React, { Children } from 'react';
 import PropTypes from 'prop-types';
-
+import cn from "classnames"
 import A from './A';
 import StyledLink from './StyledLink';
 import Wrapper from './Wrapper';
 
-function Button(props) {
+function Button({classType="primary",size,cut=false, ...props}) {
+  const classes = cn(classType,size)
   // Render an anchor tag
   let button = (
-    <A href={props.href} className="primary" onClick={props.onClick}>
+    <A href={props.href} className={classes} onClick={props.onClick}>
       {Children.toArray(props.children)}
     </A>
   );
@@ -24,14 +25,14 @@ function Button(props) {
   // If the Button has a handleRoute prop, we want to render a button
   if (props.to) {
     button = (
-      <StyledLink to={props.to} {...props} className="primary">
+      <StyledLink to={props.to} {...props} className={classes}>
         {Children.toArray(props.children)}
       </StyledLink>
     );
   }
 
   return (
-    <Wrapper>
+    <Wrapper className={cn({"cut":cut})} >
       {button}
     </Wrapper>
   );

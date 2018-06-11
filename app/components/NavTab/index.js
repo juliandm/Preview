@@ -10,11 +10,10 @@ export default styled(NavLink)`
   font-size: 14px;
 
   line-height: 44px;
-  min-width: 100px;
-  margin: 0;
+  min-width: 70px;
   border-radius: 0;
   cursor: pointer;
-  margin: 10px;
+  margin: 5px;
   padding: 12px 12px;
   text-decoration: none;
   text-align: center;

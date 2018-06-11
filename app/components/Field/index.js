@@ -16,6 +16,7 @@ import Bar from "./Bar"
 import cn from "classnames"
 import Error from "./Error"
 import Warning from "./Warning"
+import FloatLabel from "./FloatLabel"
 const renderField = ({
   input,
   label,
@@ -23,12 +24,13 @@ const renderField = ({
   meta: { touched, error, warning, active }
 }) => (
   <Wrapper>
-    <Input {...input} placeholder={label} type={type}  />
-      <Bar className={cn({"focused":active||warning||error,"warning":warning,"error":error})} />
-      {touched &&
-        ((error && <Error>{error}</Error>) ||
-          (warning && <Warning>{warning}</Warning>))}
-      {/* <Bar  /> */}
+    <FloatLabel className={cn({"focused":active||input.value.length>0})} >{label}</FloatLabel>
+    <Input {...input} placeholder={""} type={type}  />
+    <Bar className={cn({"focused":touched && (active||warning||error),"warning":touched && warning,"error":touched && error})} />
+    {touched &&
+      ((error && <Error>{error}</Error>) ||
+        (warning && <Warning>{warning}</Warning>))}
+    {/* <Bar  /> */}
           
   </Wrapper>
 )

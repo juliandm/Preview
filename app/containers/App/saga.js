@@ -57,7 +57,7 @@ function* _login({from}) {
       history.push(from) // Call two times because buggy?
       yield call(history.push, from)
     } else {
-      yield put(alertError("No user found"))
+      yield put(alertError("No user found with those credentials"))
       yield put(loginFailure(""))
       
     }

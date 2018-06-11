@@ -5,7 +5,6 @@ position: absolute;
 color: #ffa700;
 font-weight: 200;
 font-size: 12px;
-margin: 0 .5rem;
 `;
 
 export default Wrapper;

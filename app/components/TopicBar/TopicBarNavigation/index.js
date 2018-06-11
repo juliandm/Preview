@@ -16,21 +16,22 @@ import Button from "components/Button"
 function TopicBarNavigation({match, MAX_TOPICS_REACHED, onAddTopic}) {
   return (
     <Wrapper>
-          
+        
         <NavTab to={`/explorer/info`}>
-        Info
+        <i className="fas fa-info" ></i>  Info
         </NavTab>
         
         <NavTab to={`/explorer/structure`}>
-        Structure
+                  
+        <i className="fas fa-sitemap" ></i>  Structure
         </NavTab>
         
         
         <NavTab to={`/explorer/learning`}>
-        Learning
+        <i className="fas fa-lightbulb" ></i>  Learning
         </NavTab>
         
-        {!MAX_TOPICS_REACHED && <Button onClick={onAddTopic}>Add Topic</Button> }
+        {!MAX_TOPICS_REACHED && <div style={{display:"flex",justifyContent:"flex-end",flex:1}}> <Button onClick={onAddTopic}><i className="fas fas-3x fa-plus" ></i> Add Topic</Button> </div>}
 
     </Wrapper>
   );

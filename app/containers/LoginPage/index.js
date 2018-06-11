@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Button from "components/Button"
 import LoadingIndicator from "components/LoadingIndicator"
@@ -7,6 +7,9 @@ import { reduxForm } from 'redux-form'
 import Field from "components/Field"
 import RowWrapper from "components/RowWrapper"
 import { compose } from 'redux';
+import Wrapper from "./Wrapper"
+import Alert from "components/Alert"
+import Link from "components/Link"
 
 const validate = values => {
     const errors = {}
@@ -32,23 +35,23 @@ function LoginPage ({userLogin, loggingIn,location,alertType, alertMessage, ...r
         const {state} = location || {"state":{"from":{"pathname":"/"}}}
         return state.from.pathname
     }
-    
-    return (
+    console.log(rest)
+    return (<Wrapper>
+        <h2>Login into your account</h2>
         <form>
         <Field name="email" type="email"  label="Email" />
         <Field name="password" type="password" label="Password" />
         <RowWrapper>
-            <Button type="submit" disabled={loggingIn} onClick={()=>userLogin(prevPath())}>
+            <Button cut type="submit" disabled={loggingIn||rest.syncErrors} onClick={()=>userLogin(prevPath())}>
             Submit
             </Button>
-            <Button type="button" disabled={loggingIn} onClick={rest.reset}>
-            Clear Values
-            </Button>
-            <Link to="/register" >Register</Link>
-            <div>{alertMessage}</div>
+            <Link to="/register" >Signup</Link>
+            <Link to="/reset" >I forgot my password</Link>
+            
+            <Alert message={alertMessage} type={alertType} />
         </RowWrapper>
         </form>
-    );
+    </Wrapper>);
 }
  
 const withReduxForm = reduxForm({

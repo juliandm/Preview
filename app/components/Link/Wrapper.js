@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-position: absolute;
-color: #eb5815;
-font-weight: 200;
-font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
 `;
 
 export default Wrapper;

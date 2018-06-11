@@ -16,6 +16,7 @@ import Field from "components/Field"
 import Button from "components/Button"
 import RowWrapper from "components/RowWrapper"
 import scorePassword from "./passwordScore"
+import Wrapper from "./Wrapper"
 
 const validate = values => {
   const errors = {}
@@ -53,22 +54,23 @@ export class RegisterPage extends React.Component { // eslint-disable-line react
   render() {
     const {registering, userRegister, reset, alertType, alertMessage} = this.props
     return (
+      <Wrapper>
+        <h2>Create a new account</h2>
+        
       <form>
       <Field name="email" type="email"  label="Email" />
       <Field name="password" type="password" label="Password" />
       <Field name="repeatPassword" type="password" label="Repeat Password" />
       
       <RowWrapper>
-        <Button type="submit" disabled={registering} onClick={()=>userRegister()}>
-          Submit
+        <Button cut type="submit" disabled={registering} onClick={()=>userRegister()}>
+          Signup
         </Button>
-        <Button type="button" disabled={registering} onClick={reset}>
-          Clear Values
-        </Button>
+
         {alertMessage}
       </RowWrapper>
     </form>
-    )
+    </Wrapper>)
   }
 }
 

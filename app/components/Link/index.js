@@ -1,15 +1,32 @@
-import { Link } from 'react-router-dom';
+/**
+*
+* Input
+*
+*/
+
+import React from 'react';
 import styled from 'styled-components';
+import {Link as RouterLink} from "react-router-dom"
+import { FormattedMessage } from 'react-intl';
+import Wrapper from "./Wrapper"
 
-export default styled(Link)`
+const StyledLink = styled(RouterLink)`
+  text-decoration: none;
+  color: #445d6e;
+  line-height: 2rem;
+  height: 2rem;
+  
+  &:hover {
+    text-decoration: underline;
+    
+  }
+`
 
-color: #41addd;
-text-decoration: none;
-text-align: center;
-transition: background-color .4s cubic-bezier(.25,.8,.25,1),border-color .6s cubic-bezier(.25,.8,.25,1);
-&:hover {
-  color: #6cc0e5;
+function Link({to,children, ...rest}) {
+  return (<Wrapper>
+        <StyledLink to={to}>{children} </StyledLink>
+        </Wrapper>);
 }
 
 
-`;
+export default Link;

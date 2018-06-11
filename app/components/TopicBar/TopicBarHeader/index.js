@@ -18,8 +18,8 @@ function TopicBarHeader({onRemoveTopic, onChange, ...rest}) {
   return (
     <Wrapper>
         <Input {...rest} onChange={onChange.bind(this)} />
-        <Button className="primary" onClick={onRemoveTopic} >
-        x
+        <Button classType="primary" size="s" className="primary" onClick={onRemoveTopic} >
+        <i className="fas fas-3x fa-trash-alt" ></i>
         </Button>
     </Wrapper>
   );
