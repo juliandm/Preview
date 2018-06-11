@@ -1,14 +1,13 @@
 
-import { fromJS } from 'immutable';
 
 // The initial state of the App
 export const initialState = function (){
-     return fromJS({
+     return {
         loading: false,
         error: false,
         currentTopic: false,
         topics: [topicConstructor()]
-    });
+    };
 }
 
 
@@ -35,16 +34,16 @@ export const topicDataConstructor = function (data) { // data is object of all c
     for (let attr in data) {
       dataObject[attr] = data[attr]
     }
-    return fromJS(dataObject)
+    return dataObject
 }
   
 export const topicConstructor = function (name="",data={},changed=false,loading=false){
-    return fromJS({
+    return {
         "name":name,
         "data":topicDataConstructor(data),
         "changed":changed, 
         "loading":loading
-    })
+    }
 }
   
   

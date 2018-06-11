@@ -6,7 +6,7 @@
 
 import React from 'react';
 // import styled from 'styled-components';
-import { Field as ReduxField } from 'redux-form/immutable'
+import { Field as ReduxField } from 'redux-form'
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';

@@ -51,6 +51,8 @@ export function loadTopicData(position) {
 }
 
 export function topicLoaded(position, topicData) {
+  console.log("LOAD TOPIC SUCESS ACTION", position, topicData)
+  
   return {
     type: LOAD_TOPIC_SUCCESS,
     position,

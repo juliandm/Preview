@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect';
 
-const selectRoute = (state) => state.get('route');
-const selectAuth = (state) => state.getIn(['authentication', "auth"]) ;
-const selectRegister = (state) => state.getIn(['authentication', "register"]) ;
-const selectAlert = (state) => state.getIn(['authentication', "alert"]) ;
+const selectRoute = (state) => state.route;
+const selectAuth = (state) => state.authentication.auth ;
+const selectRegister = (state) => state.authentication.register ;
+const selectAlert = (state) => state.authentication.alert ;
 
-const selectForm = (state) => state.get("form");
+const selectForm = (state) => state.form;
 
 
 
@@ -13,23 +13,23 @@ const selectForm = (state) => state.get("form");
 
 const makeSelectLocation = () => createSelector(
   selectRoute,
-  (routeState) => routeState.get('location').toJS()
+  (routeState) => routeState.location
 );
 
 
 
 const makeSelectLoggingIn = () => createSelector(
   selectAuth,
-  (substate) => substate.get("logginIn")
+  (substate) => substate.loggingIn
 );
 
 const makeSelectLoggedIn = () => createSelector(
   selectAuth,
-  (substate) => substate.get("loggedIn")
+  (substate) => substate.loggedIn
 );
 const makeSelectRegistering = () => createSelector(
   selectRegister,
-  (substate) => substate.get("registering")
+  (substate) => substate.registering
 );
 const makeSelectLoginEmail = () => createSelector(
   selectForm,
@@ -50,12 +50,12 @@ const makeSelectRegisterPw = () => createSelector(
 
 const makeSelectAlertType = () => createSelector(
   selectAlert,
-  (substate) => substate.get("type")
+  (substate) => substate.type
 );
 
 const makeSelectAlertMessage = () => createSelector(
   selectAlert,
-  (substate) => substate.get("message")
+  (substate) => substate.message
 );
 
 export {

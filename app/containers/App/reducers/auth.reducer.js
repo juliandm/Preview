@@ -1,35 +1,24 @@
 import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from '../constants/index.js';
-import { fromJS } from 'immutable';
 
 
 let user = JSON.parse(localStorage.getItem('user'));
 
-const initialState = fromJS({
+const initialState = {
   loggingIn: false,
   user: user || false,
   loggedIn: user ? true : false
-});
+};
 
 export function auth(state = initialState, action) {
   switch (action.type) {
     case LOGIN_REQUEST:
-    
-      return state
-        .set("loggingIn", true)
-        .set("user", action.user);    
+      return {...state, loggingIn:true,user:action.user}  
     case LOGIN_SUCCESS:
-      return state
-        .set("loggedIn", true)
-        .set("loggingIn", false)
-        .set("user", action.user); 
+      return {...state, loggingIn:false, loggedIn:true, user: action.user}
     case LOGIN_FAILURE:
-      return state
-        .set("loggingIn", false)
-        .set("user", false); 
+      return {...state, loggingIn:false, user:false}
     case LOGOUT:
-      return state
-        .set("loggedIn", false)
-        .set("user", false); 
+      return {...state, loggedIn:false, user:false}
     default:
       return state
   }

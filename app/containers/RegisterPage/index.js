@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { reduxForm } from 'redux-form/immutable'
+import { reduxForm } from 'redux-form'
 import { withRouter } from "react-router-dom"
 import Field from "components/Field"
 import Button from "components/Button"

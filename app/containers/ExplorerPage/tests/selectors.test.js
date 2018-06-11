@@ -1,4 +1,3 @@
-// import { fromJS } from 'immutable';
 // import { selectExplorerPageDomain } from '../selectors';
 
 describe('selectExplorerPageDomain', () => {

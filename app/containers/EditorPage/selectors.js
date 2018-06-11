@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the editorPage state domain
  */
-const selectEditorPageDomain = (state) => state.get('editor');
+const selectEditorPageDomain = (state) => state.editor;
 
 /**
  * Other specific selectors
@@ -16,7 +16,7 @@ const selectEditorPageDomain = (state) => state.get('editor');
 
 const makeSelectEditorPage = () => createSelector(
   selectEditorPageDomain,
-  (substate) => substate.toJS()
+  (substate) => substate
 );
 
 export default makeSelectEditorPage;

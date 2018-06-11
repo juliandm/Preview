@@ -1,26 +1,19 @@
 import { GETALL_FAILURE, GETALL_REQUEST, GETALL_SUCCESS } from '../constants/index.js';
-import { fromJS } from 'immutable';
 
 
-const initialState = fromJS({
+const initialState = {
   loading: false,
   items: false,
   error: false
-})
+}
 export function users(state = initialState, action) {
   switch (action.type) {
     case GETALL_REQUEST:
-      return state
-        .set("loading",true)
-        .set("items",false)
+      return {...state, loading: true, items: false}
     case GETALL_SUCCESS:
-      return state
-        .set("loading",false)
-        .set("items",action.users)
+      return {...state, loading: false, items: action.users}
     case GETALL_FAILURE:
-      return state
-        .set("loading",false)
-        .set("error",action.error)
+      return {...state, loading: false, error: action.error}
     default:
       return state
   }

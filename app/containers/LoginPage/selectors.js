@@ -3,8 +3,8 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the loginPage state domain
  */
-const selectLoginPageDomain = (state) => state.get('loginPage');
-const selectAuth = (state) => state.get('authentication');
+const selectLoginPageDomain = (state) => state.loginPage;
+const selectAuth = (state) => state.authentication;
 
 
 /**
@@ -18,7 +18,7 @@ const selectAuth = (state) => state.get('authentication');
 
 const makeSelectLoginPage = () => createSelector(
   selectLoginPageDomain,
-  (substate) => substate.toJS()
+  (substate) => substate
 );
 
 

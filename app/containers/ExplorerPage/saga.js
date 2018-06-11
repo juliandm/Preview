@@ -25,8 +25,8 @@ export function* getTopicBarData() {
       if (topic.changed) {
         //REQUEST HERE
         // const data = yield call(request, requestURL);
-        const data = topicDataConstructor({"links":[{"title":"Hwattt","author": "Hehehe"}], "stats":";)"})
-        yield put(topicLoaded(i, data));
+        const data = {"links":[{"title":"Hwattt","author": "Hehehe"}], "stats":";)"};
+        yield put(topicLoaded(parseInt(i), data));
       }
     }
 

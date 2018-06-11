@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Button from "components/Button"
 import LoadingIndicator from "components/LoadingIndicator"
-import { reduxForm } from 'redux-form/immutable'
+import { reduxForm } from 'redux-form'
 import Field from "components/Field"
 import RowWrapper from "components/RowWrapper"
 import { compose } from 'redux';
@@ -44,7 +44,7 @@ function LoginPage ({userLogin, loggingIn,location,alertType, alertMessage, ...r
             <Button type="button" disabled={loggingIn} onClick={rest.reset}>
             Clear Values
             </Button>
-            <Link to="/register" >Login</Link>
+            <Link to="/register" >Register</Link>
             <div>{alertMessage}</div>
         </RowWrapper>
         </form>
