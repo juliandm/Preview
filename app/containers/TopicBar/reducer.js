@@ -64,30 +64,34 @@ function explorerPageReducer(state = initialState(), action) {
       return {
         ...state,
         topics: state.topics.map(
-          (topic, i) => i === action.position ? {...topic, loading: true} : topic
+          (topic, i) => i === action.position ? {...topic, loading: true,error:false } : topic
         ),
-        error: false
       }    
     case LOAD_TOPIC_SUCCESS:
-      for (let key in action.topicData) {
+      for (let key in action.topic.data) {
         mergedTabs[key] = state[key].map(
-          (tab, i) => i === action.position ? {...tab, data:action.topicData}: tab
+          (tab, i) => i === action.position ? {...tab, data:action.topic.data[key]}: tab
         )
       }
       return {
         ...state,
         ...mergedTabs,
         topics: state.topics.map(
-          (topic, i) => i === action.position ? {...topic, loading: false, changed:false} : topic
+          (topic, i) => i === action.position ? {...topic, loading: false, changed:false, id:action.searchId} : topic
         )
       }         
     case LOAD_TOPIC_ERROR:
+      for (let key in tabConstructor()) {
+        mergedTabs[key] = state[key].map(
+          (tab, i) => i === action.position ? {}: tab
+        )
+      }
       return {
         ...state,
+        ...mergedTabs,
         topics: state.topics.map(
-          (topic, i) => i === action.position ? {...topic, loading: false} : topic
+          (topic, i) => i === action.position ? {...topic, loading: false, error:action.error, changed:false} : topic
         ),
-        error: action.error
       }         
     default:
       return state;

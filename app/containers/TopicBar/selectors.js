@@ -3,11 +3,18 @@
 //  */
 import {createSelector } from 'reselect';
 
-  const selectExplorer = (state) => state.explorer;
+  export const selectExplorer = (state) => state.explorer;
+  
+  export const selectCurrentId = (state, props) => props.id;
+
+  export const selectDataByTab = createSelector([selectExplorer,selectCurrentId],(substate, id)=>substate[id]);
+  export const selectTopics = createSelector(selectExplorer,(state)=>state.topics);
+  export const makeSelectErrors =()=> createSelector(selectExplorer,(state)=>state.topics.map(topic=>topic.error));
+
   export const makeSelectTopics = () => createSelector(
-    selectExplorer,
-    (substate) => substate.topics
-  );
+    selectTopics,
+    (substate) => substate
+  ); 
   export const makeSelectActiveTabs=()=> createSelector(selectExplorer,(state)=>state.activeTabs);
 
 

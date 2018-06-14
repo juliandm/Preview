@@ -30,8 +30,8 @@ import injectReducer from 'utils/injectReducer';
 import {TransitionMotion, spring, presets} from "react-motion"
 import RouteTransition from "components/RouteTransition"
 var topicChangeTimeout = 0
-import GroupTransition from "./GroupTransition.js"
-import { makeSelectTopics, makeSelectActiveTabs,makeSelectProcon, makeSelectStats, makeSelectLearningSettings, makeSelectAlternatives, makeSelectStructureSettings, makeSelectDescription, makeSelectAttributes, makeSelectUsers, makeSelectInfoSettings, makeSelectLinks, makeSelectTips, makeSelectParts, makeSelectParents} from "./selectors"
+import GroupTransition from "components/GroupTransition"
+import {makeSelectErrors, makeSelectTopics, makeSelectActiveTabs,makeSelectProcon, makeSelectStats, makeSelectLearningSettings, makeSelectAlternatives, makeSelectStructureSettings, makeSelectDescription, makeSelectAttributes, makeSelectUsers, makeSelectInfoSettings, makeSelectLinks, makeSelectTips, makeSelectParts, makeSelectParents} from "./selectors"
 export class TopicBar extends React.Component {
 
   willLeave() {
@@ -45,15 +45,7 @@ export class TopicBar extends React.Component {
     const {match} = this.props
     const MAX_TOPICS_REACHED = this.props.topics.length === 3
           
-    console.log("RENDER HEAD",this.props.location.pathname)
 
-    const elseStyles = {
-      background: "black",
-      flex: 1,
-      height: "10px",
-      margin: "0 5px",
-      color: "white"
-    }
     return (
       <Wrapper>
           <SecondaryNav >
@@ -87,10 +79,12 @@ export class TopicBar extends React.Component {
               onChange={(evt)=>{this.props.onChangeTopic(i,evt.target.value)}}
             />)}
           </RowWrapper>
-          {/* <RouteTransition pathname={ this.props.location.pathname }>
-          <div>Hallo</div>
-          </RouteTransition> */}
-            <GroupTransition >{this.props.activeTabs}</GroupTransition>
+
+            <GroupTransition attributes={["height","opacity","scale"]} data={[[80,0,0.98],[0,0,1.2],[100,1,1]]}  >
+              {this.props.activeTabs.map((title,i) =>
+                <TopicBarTab topics={this.props.topics} errors={this.props.errors} key={title} id={title} tabEls={this.props[title]} onDetail={()=>{alert("")}}/>
+              )}
+            </GroupTransition>
 
           {/* <div> {this.props.activeTabs.map((title,i) => <TopicBarTab key={title} id={title} dataByTopic={this.props[title]} onDetail={()=>{alert("")}}/>)} </div> */}
 
@@ -104,6 +98,9 @@ export class TopicBar extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
+  topics: makeSelectTopics(),
+  
+  errors: makeSelectErrors(),  
   topics: makeSelectTopics(),
   activeTabs: makeSelectActiveTabs(),
   

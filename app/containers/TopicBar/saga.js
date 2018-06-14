@@ -10,27 +10,38 @@ import { topicLoaded, topicLoadingError } from './actions';
 import { makeSelectTopics } from './selectors';
 import {topicDataConstructor} from "./constructors"
 
-
+var ID = function () {
+  // Math.random should be unique because of its seeding algorithm.
+  // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+  // after the decimal.
+  return '_' + Math.random().toString(36).substr(2, 9);
+};
 export function* getTopicBarData() {
   // Select Topic Names from store
   const topicName = "test"
   const topics = yield select(makeSelectTopics());
-  console.log("WHAT", topics)
+  const data = {"links":{"title":"Hwattt","author": "Hehehe"}, "stats":";)"};
 
 
   try {
     for (let i in topics) {
       const topic = topics[i]
       if (topic.changed) {
-        //REQUEST HERE
-        // const data = yield call(request, requestURL);
-        const data = {"links":{"title":"Hwattt","author": "Hehehe"}, "stats":";)"};
-        yield put(topicLoaded(parseInt(i), data));
+        //Simulate topics on server
+        const serverTopics = [{id: "react", name: "react", data:Object.assign({},data)}]
+        const topicById = serverTopics.filter(thistopic=>thistopic.name === topic.name)
+        if (topicById.length > 0) {
+          yield put(topicLoaded(parseInt(i), topicById[0], ID()));
+        } else {
+          yield put(topicLoadingError(parseInt(i),"Not found in system"));
+        }
       }
     }
 
   } catch (err) {
-    yield put(topicLoadingError(err));
+    for (let i in topics) {
+      yield put(topicLoadingError(parseInt(i),"Failed to fetch"));
+    }
   }
 }
 

@@ -96,9 +96,8 @@ class TopicBarTabElement extends React.Component {
 
 
   render () {
-    console.log("redner", this.props.id)
     let renderedContent = <div ></div>
-    switch (this.props.id) {
+    switch (this.props.tab) {
       //Learning
       case "links": renderedContent = this.renderLinks(); break;
       case "procon": renderedContent = this.renderProcon(); break;
@@ -116,7 +115,6 @@ class TopicBarTabElement extends React.Component {
       case "users": renderedContent = this.renderUsers(); break; 
       // case "infoSettings": renderedContent = this.renderInfoSettings(); break; 
     }
-  console.log("NEW")
     
     return (
       <Wrapper >

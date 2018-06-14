@@ -15,6 +15,7 @@ import Button from "components/Button"
 
 
 function TopicBarHeader({onRemoveTopic, onChange, ...rest}) {
+  console.log("HEADER CALLED")
   return (
     <Wrapper>
         <Input {...rest} onChange={onChange.bind(this)} />

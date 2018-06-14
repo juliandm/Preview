@@ -58,19 +58,21 @@ export function loadTopicData(position) {
   };
 }
 
-export function topicLoaded(position, topicData) {
-  console.log("LOAD TOPIC SUCESS ACTION", position, topicData)
+export function topicLoaded(position, topic, searchId) {
+  console.log("LOAD TOPIC SUCESS ACTION", position, topic)
   
   return {
     type: LOAD_TOPIC_SUCCESS,
     position,
-    topicData
+    topic,
+    searchId
   };
 }
 
-export function topicLoadingError(error) {
+export function topicLoadingError(position,error) {
   return {
     type: LOAD_TOPIC_ERROR,
-    error,
+    position,
+    error
   };
 }
