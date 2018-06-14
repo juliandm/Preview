@@ -9,17 +9,9 @@ const selectTopics = (state) => state.explorer.topics;
 
 const makeSelectTopics = () => createSelector(
   selectExplorer,
-  (explorerState) => explorerState.topics
-);
-
-
-
-const makeSelectChangedTopics = () => createSelector(
-  selectTopics,
-  (explorerState) => explorerState.filter(t => {return t.changed})
+  (substate) => substate.topics
 );
 
 export {
-  makeSelectTopics,
-  makeSelectChangedTopics
+  makeSelectTopics
 };

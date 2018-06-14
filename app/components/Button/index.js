@@ -9,12 +9,17 @@
 import React, { Children } from 'react';
 import PropTypes from 'prop-types';
 import cn from "classnames"
-import A from './A';
-import StyledLink from './StyledLink';
 import Wrapper from './Wrapper';
+import styled from 'styled-components';
+import {Link} from "react-router-dom";
 
-function Button({classType="primary",size,cut=false, ...props}) {
-  const classes = cn(classType,size)
+import styles from './styles';
+
+const A = styled.a`${styles}`;
+const StyledLink = styled(Link)`${styles}`;
+
+function Button({classType="primary",size,disabled=false, cut=false, ...props}) {
+  const classes = cn(classType,size,{"disabled":disabled})
   // Render an anchor tag
   let button = (
     <A href={props.href} className={classes} onClick={props.onClick}>
@@ -22,10 +27,10 @@ function Button({classType="primary",size,cut=false, ...props}) {
     </A>
   );
 
-  // If the Button has a handleRoute prop, we want to render a button
+  // If the Button has a to prop, we want to render a Link
   if (props.to) {
     button = (
-      <StyledLink to={props.to} {...props} className={classes}>
+      <StyledLink disabled to={props.to} {...props} className={classes}>
         {Children.toArray(props.children)}
       </StyledLink>
     );

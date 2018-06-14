@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  min-height: 100px;
+  position: absolute;
+  font-size: 5rem;
+  opacity: 0.1;
+  left: 0;
+  pointer-events: none;
 `;
 
 export default Wrapper;

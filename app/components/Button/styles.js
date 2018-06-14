@@ -34,6 +34,10 @@ const styles = css`
       border-color: #1798de;
     }
   }
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 
   &.s {
     min-width: 0px;

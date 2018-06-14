@@ -1,32 +1,26 @@
-import { NavLink } from 'react-router-dom';
+/**
+*
+* Input
+*
+*/
+
+import React from 'react';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+import styles from './styles';
+import { NavLink } from 'react-router-dom';
 
-export default styled(NavLink)`
 
-  text-transform: capitalize;
-  height: 64px;
-  color: #445d6e;
-  font-weight: 400;
-  font-size: 14px;
+function NavTab({to,children, ...rest}) {
+  var StyledTab = styled.div`${styles}`;
 
-  line-height: 44px;
-  min-width: 70px;
-  border-radius: 0;
-  cursor: pointer;
-  margin: 5px;
-  padding: 12px 12px;
-  text-decoration: none;
-  text-align: center;
-  transition: background-color .4s cubic-bezier(.25,.8,.25,1),border-color .6s cubic-bezier(.25,.8,.25,1);
-
-  &:hover {
-
+  if(to){
+     StyledTab = styled(NavLink)`${styles}`;
   }
+  return (
+    <StyledTab {...rest} to={to}>{children} </StyledTab>
+);
+}
 
-  &.active {
-    font-weight: 600;
-    color: #1488c6;
-    opacity: 1;
-    border-bottom: 2px solid #1488c6;
-  }
-`;
+
+export default NavTab;

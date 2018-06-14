@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  flex: 1;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  min-height: 100px;
+  background: #e6edf4;
+  border-bottom: solid 1px #d7dfe8;
 `;
 
 export default Wrapper;
