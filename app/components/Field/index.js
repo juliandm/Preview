@@ -11,7 +11,7 @@ import { Field as ReduxField } from 'redux-form'
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import Wrapper from "./Wrapper"
-import Input from "./Input"
+import Input from "components/Input"
 import Bar from "./Bar"
 import cn from "classnames"
 import Error from "./Error"

@@ -20,7 +20,7 @@ const styles = css`
     line-height: 32px;
     min-height: 32px;
     border-width: 2px;
-    border-radius: 2px;
+    border-radius: 1px;
     font-size: 14px;
     color: #fff;
     cursor: pointer;

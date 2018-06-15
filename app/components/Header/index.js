@@ -9,13 +9,14 @@ import Banner from './banner.jpg';
 import messages from './messages';
 import Button from "components/Button"
 import Wrapper from "./Wrapper"
+import Logo from "./Logo.js"
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <Wrapper>
-        <A href="#">
-          Edurata Project
-        </A>
+        <Logo>
+          Edurata
+        </Logo>
         <NavBar>
           <HeaderLink exact to="/">
             <FormattedMessage {...messages.home} />

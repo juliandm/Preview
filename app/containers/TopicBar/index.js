@@ -44,7 +44,6 @@ export class TopicBar extends React.Component {
   render () {
     const {match} = this.props
     const MAX_TOPICS_REACHED = this.props.topics.length === 3
-          
 
     return (
       <Wrapper>
@@ -80,11 +79,11 @@ export class TopicBar extends React.Component {
             />)}
           </RowWrapper>
 
-            <GroupTransition attributes={["height","opacity","scale"]} data={[[80,0,0.98],[0,0,1.2],[100,1,1]]}  >
+            {/* <GroupTransition attributes={["height","opacity","scale"]} data={[[0,0,0.98],[0,0,1.2],[100,1,1]]}  > */}
               {this.props.activeTabs.map((title,i) =>
                 <TopicBarTab topics={this.props.topics} errors={this.props.errors} key={title} id={title} tabEls={this.props[title]} onDetail={()=>{alert("")}}/>
               )}
-            </GroupTransition>
+            {/* </GroupTransition> */}
 
           {/* <div> {this.props.activeTabs.map((title,i) => <TopicBarTab key={title} id={title} dataByTopic={this.props[title]} onDetail={()=>{alert("")}}/>)} </div> */}
 

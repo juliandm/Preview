@@ -12,7 +12,7 @@ const Wrapper = styled.span`
     &.focused {
         color: #22b8eb;
         font-size: .6rem;
-        bottom: 2.5rem;
+        bottom: 2.9rem;
     }
 
 `;
