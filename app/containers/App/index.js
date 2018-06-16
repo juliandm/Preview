@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter, MemoryRouter } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
 import ExplorerPage from 'containers/ExplorerPage/Loadable';
@@ -51,7 +51,8 @@ class App extends React.Component {// TODO redirect to old history
           <Route exact path="/" component={HomePage} />
           <Route path="/login" render={()=><LoginPage alertType={this.props.alertType} alertMessage={this.props.alertMessage} userLogin={this.props.userLogin} loggingIn={this.props.loggingIn} />} />
           <Route path="/register" render={()=><RegisterPage alertType={this.props.alertType} alertMessage={this.props.alertMessage} userRegister={this.props.userRegister} registering={this.props.registering} />} />
-          <PrivateRoute path="/explorer" component={ExplorerPage} />
+          
+            <PrivateRoute path="/explorer" component={ExplorerPage} />
           
           <PrivateRoute path="/editor" component={EditorPage} />        
           <Route component={NotFoundPage} />

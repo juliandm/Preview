@@ -17,22 +17,19 @@ import SecondaryNav from "components/SecondaryNav"
 import RowWrapper from "components/RowWrapper"
 import NavTab from "components/NavTab"
 import Button from "components/Button"
-
+import BarChart from "components/D3/BarChart.js"
 
 export class Map extends React.Component {
     render () {
+      
       return (
         <Wrapper>
             <SecondaryNav >
-              <NavTab to="/map">
-                <i className="fas fa-map" ></i>  Map
-              </NavTab>
-              
-              <NavTab to="/detail">
-                        
-                <i className="fas fa-search" ></i>  Detail
-              </NavTab>
+
+
             </SecondaryNav>
+            <BarChart />
+            
         </Wrapper>
     );
   }

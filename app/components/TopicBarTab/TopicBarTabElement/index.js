@@ -11,16 +11,12 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import A from "components/A"
 import Wrapper from "./Wrapper"
-
 class TopicBarTabElement extends React.Component {
   constructor (props) {
     super(props)
     this.renderLinks = this.renderLinks.bind(this)
     this.renderStats = this.renderStats.bind(this)
     
-  }
-  shouldComponentUpdate() {
-    return false;
   }
   renderLinks() {
     let {links=[]} = this.props.data
@@ -118,7 +114,7 @@ class TopicBarTabElement extends React.Component {
     
     return (
       <Wrapper >
-        {renderedContent}
+        {!this.props.topic.error ? renderedContent: this.props.topic.error}
       </Wrapper>
     );
   }
