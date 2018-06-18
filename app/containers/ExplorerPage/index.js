@@ -9,8 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import {MemoryRouter} from "react-router-dom"
-import { withRouter, Link } from 'react-router'
+import {MemoryRouter,withRouter} from "react-router-dom"
 
 import { compose } from 'redux';
 import styled from "styled-components"
@@ -26,19 +25,24 @@ import {makeSelectActiveTabs,makeSelectTopics} from "./selectors.js"
 import { changeTopicName, loadTopicData, addTopic, removeTopic} from './actions';
 import Map from "components/Map"
 import Button from "components/Button"
-import TopicBar  from "containers/TopicBar"
+import TopicBar  from "components/TopicBar"
 import NavTab from "components/NavTab"
-import {makeSelectProcon, makeSelectStats, makeSelectLearningSettings, makeSelectAlternatives, makeSelectStructureSettings, makeSelectDescription, makeSelectAttributes, makeSelectUsers, makeSelectInfoSettings, makeSelectLinks, makeSelectTips, makeSelectParts, makeSelectParents} from "./selectors"
-
 import Wrapper from "./Wrapper"
 var topicChangeTimeout;
+
+// Nav responsible for
+// Select: Auswahl der Tabs
+
+// Buttons: Add, Share
+
+// Settings: Split Screen
 
 export class ExplorerPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     const MAX_TOPICS_REACHED = this.props.topics.length === 3
     return (<MemoryRouter>
       <Wrapper>
-        
+          
           <SecondaryNav >
             <div style={{display:"flex",justifyContent:"flex-start",flex:1}}> 
               <Button disabled={MAX_TOPICS_REACHED} onClick={this.props.onAddTopic}><i className="fas fas-3x fa-plus" ></i> Add Topic</Button>
@@ -63,8 +67,6 @@ export class ExplorerPage extends React.Component { // eslint-disable-line react
             <NavTab to="/detail">          
               <i className="fas fa-search" ></i>  Detail
             </NavTab>
-              <i className="fas fa-search" ></i>
-              <i className="fas fa-square-full" ></i>
           </SecondaryNav>
           
           <TopicBar {...this.props} topics={this.props.topics} activeTabs={this.props.activeTabs} />        
@@ -80,24 +82,8 @@ ExplorerPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  topics: makeSelectTopics(),
-  activeTabs: makeSelectActiveTabs(),
-    //Learning
-    links: makeSelectLinks(),
-    procon: makeSelectProcon(), 
-    stats: makeSelectStats(), 
-    tips: makeSelectTips(),
-    learningSettings: makeSelectLearningSettings(),
-    //Structure
-    parts: makeSelectParts(), // shared and unique
-    alternatives: makeSelectAlternatives(), 
-    parents: makeSelectParents(), 
-    structureSettings: makeSelectStructureSettings(),
-    //Info
-    description: makeSelectDescription(), 
-    attributes: makeSelectAttributes(), 
-    users: makeSelectUsers(), // experts and mentors
-    infoSettings: makeSelectInfoSettings()
+    topics: makeSelectTopics(),
+    activeTabs: makeSelectActiveTabs(),
 })
 
 function mapDispatchToProps(dispatch) {
