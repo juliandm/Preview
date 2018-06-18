@@ -33,9 +33,9 @@ import { loginRequest, logout, registerRequest } from './actions/index.js';
 import reducer from './reducers/index.js';
 import saga from './saga';
 
-export const PrivateRoute = ({ component: Component, ...rest }) => (
+export const PrivateRoute = ({ component: Component,loggedIn, ...rest }) => (
   <Route {...rest} render={props => (
-      localStorage.getItem('user')
+      loggedIn
           ? <Component {...props} />
           : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
   )} />
@@ -44,6 +44,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
 
 class App extends React.Component {// TODO redirect to old history
   render () {
+    console.log(this.props.loggedIn)
     return (
       <Wrapper>
         <Header is_authenticated={this.props.loggedIn}  userLogout={this.props.userLogout} />
@@ -52,9 +53,9 @@ class App extends React.Component {// TODO redirect to old history
           <Route path="/login" render={()=><LoginPage alertType={this.props.alertType} alertMessage={this.props.alertMessage} userLogin={this.props.userLogin} loggingIn={this.props.loggingIn} />} />
           <Route path="/register" render={()=><RegisterPage alertType={this.props.alertType} alertMessage={this.props.alertMessage} userRegister={this.props.userRegister} registering={this.props.registering} />} />
           
-            <PrivateRoute path="/explorer" component={ExplorerPage} />
+          <PrivateRoute loggedIn={this.props.loggedIn} path="/explorer" component={ExplorerPage} />
           
-          <PrivateRoute path="/editor" component={EditorPage} />        
+          <PrivateRoute loggedIn={this.props.loggedIn} path="/editor" component={EditorPage} />        
           <Route component={NotFoundPage} />
         </Switch>
         

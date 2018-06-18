@@ -98,7 +98,7 @@ export class EditorPage extends React.Component { // eslint-disable-line react/p
                   <div>
                     <span>Similar: </span> 
                     {this.props.alternatives.map((name)=>
-                      <span><a href="#" onClick={(e)=>{e.preventDefault(); return this.props.changeTopicName(name,true)}}>{name}</a> </span>  
+                      <span key={name} ><a href="#" onClick={(e)=>{e.preventDefault(); return this.props.changeTopicName(name,true)}}>{name}</a> </span>  
                     )} 
                   </div>
                   :

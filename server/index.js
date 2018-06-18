@@ -13,6 +13,7 @@ const nanoid = require("nanoid");
 const {User} = require("./models/user")
 var bodyParser = require('body-parser')
 const bcrypt = require('bcrypt');
+var mongoose = require('mongoose');
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
 // In production we need to pass these values in instead of relying on webpack
@@ -28,32 +29,46 @@ const customHost = argv.host || process.env.HOST;
 const host = customHost || null; // Let http.Server use its default IPv6/4 host
 const prettyHost = customHost || 'localhost';
 
-// parse application/json
+// DB
+mongoose.connect('mongodb://localhost:27017');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("Db connected")
+});
+
+// Parsing
 app.use(bodyParser.json())
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
+
+const generateToken = function(user) {
+  return {
+    id: user._id,
+    token: nanoid(48),
+    ttl:1800000
+  };
+}
+// User Api
 app.post('/users/authenticate',async function(req, res) {
   const {email, password} = req.body
   let response = {}
   
   console.log(email, password, users)
   // Fake Search query
-  user = users.find(el=>el.email === email)
+  user = await User.findOne({email: email})
+  console.log(user, user.password, password)
+
   if (user) {
     const PW_MATCH = await new Promise((resolve, reject) => {
-      bcrypt.compare(password, user.pw, function(err, res) {
+      bcrypt.compare(password,user.password, function(err, res) {
         if (res && !err) resolve(res)
         else reject(err)
       });
     }).catch((e)=>{console.log(e)})
+    console.log(PW_MATCH)
     if (PW_MATCH) {
-      response = {
-        id: user.id,
-        email: user.email,
-        token: nanoid(48),
-        ttl:1800000
-      };
+      response = generateToken(user)
     }
   }
 
@@ -72,10 +87,11 @@ app.post('/users/authenticate',async function(req, res) {
   })
 
   // Fake Save DB
-  users.push({"id": nanoid(10), "pw": hashedPassword, "email":email})
-
+  const newUser = new User({password: hashedPassword, email: email})
+  const returnedUser = await newUser.save()
+  console.log(returnedUser)
   let responseJson = {
-    success: true
+    success: returnedUser
   };
   res.send(responseJson)
 })

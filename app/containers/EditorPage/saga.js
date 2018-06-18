@@ -4,15 +4,16 @@
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { LOAD, CHECK_TOPIC } from './constants';
-import { loadSuccess, loadError, checkTopicResult, loadEditorTab } from './actions';
-import {makeSelectTopicName, makeSelectData, selectEditorTab} from "./selectors"
+import { loadSuccess, loadError, checkTopicSuccess, loadEditorTab } from './actions';
+import {makeSelectTopicName, makeSelectTopicId, makeSelectData, selectEditorTab} from "./selectors"
+import {topicApi} from "services"
 const delay = (ms) => new Promise(res => setTimeout(res, ms))
 export function* checkTopicName() {
   try {
     //Simulate data on server
     const name = yield select(makeSelectTopicName())
     yield delay(1000)
-    yield put(checkTopicResult(name==="react", ["React Router", "React Redux"]));
+    yield put(checkTopicSuccess(name==="react", ["React Router", "React Redux"]));
     yield put(loadEditorTab())
   } catch (err) {
     yield put(loadError("Failed to fetch "));
@@ -22,8 +23,11 @@ export function* checkTopicName() {
 export function* getEditorData() {
   try {
     //Simulate data on server
-    const tab = yield select(selectEditorTab)  
+    const tab = yield select(selectEditorTab) 
+    const id = yield select(makeSelectTopicId())
+     
     //Use tab info in backend  
+    yield call(topicApi({id,method: "GET",path:["children"]}))
     yield delay(1000)
     
     const serverData = {"treeData": [{ id:"chicken", title: 'Chicken', children: [{ id:"hallo", title: 'Egg' }] }]}

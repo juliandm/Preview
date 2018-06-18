@@ -21,7 +21,7 @@ export function registerFailure(error) { return { type: REGISTER_FAILURE, error 
 
 export function loginRequest(from) { return { type: LOGIN_REQUEST, from } }
 export function loginSuccess(user) { return { type: LOGIN_SUCCESS, user } }
-export function loginFailure(error) { return { type: LOGIN_FAILURE, error } }
+export function loginFailure(error) { return { type: LOGIN_FAILURE } }
 
 export function getAllRequest() { return { type: GETALL_REQUEST } }
 export function getAllSuccess(users) { return { type: GETALL_SUCCESS, users } }

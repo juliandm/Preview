@@ -51,14 +51,17 @@ function* _login({from}) {
   console.log(email, pw)
   
   try {
-    const user = yield call(userService.login,email,pw)
+    const {user} = yield call(userService.login,email,pw)
+    console.log(user)
     if (user.token) {
       yield put(loginSuccess(user))
+      yield put(alertSuccess("Successfully logged in"))
+      
       history.push(from) // Call two times because buggy?
       yield call(history.push, from)
     } else {
+      yield put(loginFailure())
       yield put(alertError("No user found with those credentials"))
-      yield put(loginFailure(""))
       
     }
 

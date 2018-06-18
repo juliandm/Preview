@@ -12,6 +12,7 @@ export const selectEditorTab = (state) => {
 
 export const makeSelectData = () => createSelector([selectEditor,selectEditorTab],(substate, tabKey) => substate[tabKey]);
 export const makeSelectTopicName = () => createSelector(selectEditor,(substate) => substate.topicName);
+export const makeSelectTopicId = () => createSelector(selectEditor,(substate) => substate.topicId);
 export const makeSelectTabName = () => createSelector(selectEditorTab,(substate) => substate);
 
 export const makeSelectNameAlternatives = () => createSelector(selectEditor,(substate) => substate.alternatives);
