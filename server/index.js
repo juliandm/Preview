@@ -1,6 +1,7 @@
 /* eslint consistent-return:0 */
 
 const express = require('express');
+const router = express.Router()
 const logger = require('./logger');
 const argv = require('./argv');
 const port = require('./port');
@@ -10,19 +11,17 @@ const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngr
 const resolve = require('path').resolve;
 const app = express();
 const nanoid = require("nanoid");
-const {User} = require("./models/user")
 var bodyParser = require('body-parser')
 const bcrypt = require('bcrypt');
 var mongoose = require('mongoose');
-// If you need a backend, e.g. an API, add your custom backend-specific middleware here
-// app.use('/api', myApi);
+var apis = require('./apis');
+
+
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
   publicPath: '/',
 });
-var users = [];
-var loggedIn = []
 
 // get the intended host and port number, use localhost and port 3000 if not provided
 const customHost = argv.host || process.env.HOST;
@@ -31,70 +30,16 @@ const prettyHost = customHost || 'localhost';
 
 // DB
 mongoose.connect('mongodb://localhost:27017');
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log("Db connected")
-});
+db.once('open',()=>{console.log("Db connected")});
 
 // Parsing
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-
-const generateToken = function(user) {
-  return {
-    id: user._id,
-    token: nanoid(48),
-    ttl:1800000
-  };
-}
-// User Api
-app.post('/users/authenticate',async function(req, res) {
-  const {email, password} = req.body
-  let response = {}
-  
-  console.log(email, password, users)
-  // Fake Search query
-  user = await User.findOne({email: email})
-  console.log(user, user.password, password)
-
-  if (user) {
-    const PW_MATCH = await new Promise((resolve, reject) => {
-      bcrypt.compare(password,user.password, function(err, res) {
-        if (res && !err) resolve(res)
-        else reject(err)
-      });
-    }).catch((e)=>{console.log(e)})
-    console.log(PW_MATCH)
-    if (PW_MATCH) {
-      response = generateToken(user)
-    }
-  }
-
-
-
-
-  res.send(response)
-})  
-.post("/users/register",async (req, res, next) => {
-  const {email, password} = req.body
-  const hashedPassword = await new Promise((resolve, reject) => {
-    bcrypt.hash(password, 10, function(err, hash) {
-      if (err) reject(err)
-      resolve(hash)
-    });
-  })
-
-  // Fake Save DB
-  const newUser = new User({password: hashedPassword, email: email})
-  const returnedUser = await newUser.save()
-  console.log(returnedUser)
-  let responseJson = {
-    success: returnedUser
-  };
-  res.send(responseJson)
-})
+//Apis
+app.use("/api", apis)
 
 // Start your app.
 app.listen(port, host, (err) => {

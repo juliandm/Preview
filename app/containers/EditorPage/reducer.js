@@ -9,15 +9,15 @@ import {
   UPDATE,
   SAVE,
   CHECK_TOPIC,
-  CHECK_TOPIC_RESULT,
   LOAD_SUCCESS,
   LOAD_ERROR,
-  CHANGE_TOPIC
+  CHANGE_TOPIC,
+  CHECK_TOPIC_SUCCESS
 } from './constants';
 
 const initialState = {
   topicName: "",
-  is_valid: false,
+  id: false,
   alternatives: false,
   checking:false,
   loading: false,
@@ -42,13 +42,14 @@ function editorPageReducer(state = initialState, action) {
       return {
         ...state,
         checking: true,
+        id: false,
         alternatives: false
       } 
-    case CHECK_TOPIC_RESULT:    
+    case CHECK_TOPIC_SUCCESS:    
       return {
         ...state,
         checking: false,
-        is_valid: action.is_valid,
+        id: action.id,
         alternatives: action.alternatives
       } 
     case LOAD:

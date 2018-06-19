@@ -12,8 +12,8 @@ export function* checkTopicName() {
   try {
     //Simulate data on server
     const name = yield select(makeSelectTopicName())
-    yield delay(1000)
-    yield put(checkTopicSuccess(name==="react", ["React Router", "React Redux"]));
+    const answer = yield call(topicApi({id:name,method: "GET", query:{id_method: "name"} }))
+    yield put(checkTopicSuccess(answer));
     yield put(loadEditorTab())
   } catch (err) {
     yield put(loadError("Failed to fetch "));
