@@ -4,10 +4,10 @@ const Schema = mongoose.Schema
 
 module.exports.Topic = mongoose.model('Topic', new Schema({
   name: String,
-  parents: [{type: Schema.Types.ObjectId, ref: 'Topic'}],
-
+  label: String, // Industry Standard, Newcomer
+  stats: {type: Schema.Types.ObjectId, ref: 'Stats'},
   links: String,
-  description: String,
+  description: {type: Schema.Types.ObjectId, ref: 'Description'},
   attributes: [{type: Schema.Types.ObjectId, ref: 'Attribute'}],
   procons: [{type: Schema.Types.ObjectId, ref: 'Procon'}],
 

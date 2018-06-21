@@ -10,17 +10,18 @@ export default css`
   font-size: 14px;
 
   line-height: 44px;
-  min-width: 70px;
+  min-width: ${({mini})=> !mini ? "70px" : "40px"};
   border-radius: 0;
   cursor: pointer;
-  margin: 0 5px;
-  padding: 12px 12px;
+  margin: ${({mini})=> !mini ? "0 5px" : "0"};
+  padding: ${({mini})=> !mini ? "12px" : "12px 0px"};
   text-decoration: none;
   text-align: center;
-  transition: all .4s cubic-bezier(.25,.8,.25,1),border-color .6s cubic-bezier(.25,.8,.25,1);
+  transition: all .1s;
 
   &:hover {
-
+    color: #1798de;
+    border-bottom: 1px solid #1798de;
   }
 
   &.active {

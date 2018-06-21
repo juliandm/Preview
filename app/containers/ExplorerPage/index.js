@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import {MemoryRouter,withRouter} from "react-router-dom"
+import {MemoryRouter,withRouter, Switch, Route} from "react-router-dom"
 
 import { compose } from 'redux';
 import styled from "styled-components"
@@ -22,13 +22,18 @@ import reducer from "./reducer"
 import saga from "./saga.js"
 import {changeActiveTabs} from "./actions";
 import {makeSelectActiveTabs,makeSelectTopics} from "./selectors.js"
-import { changeTopicName, loadTopicData, addTopic, removeTopic} from './actions';
+import {changeSearchAttribute, changeTopicName, loadTopicData, addTopic, removeTopic} from './actions';
 import Map from "components/Map"
 import Button from "components/Button"
-import TopicBar  from "components/TopicBar"
 import NavTab from "components/NavTab"
 import Wrapper from "./Wrapper"
+import TopicArea from "./Areas/TopicArea"
+import FindArea from "./Areas/FindArea"
+import LearnArea from "./Areas/LearnArea"
+import CompareArea from "./Areas/CompareArea"
+import SearchInput from "./SearchInput"
 var topicChangeTimeout;
+
 
 // Nav responsible for
 // Select: Auswahl der Tabs
@@ -40,45 +45,54 @@ var topicChangeTimeout;
 export class ExplorerPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     const MAX_TOPICS_REACHED = this.props.topics.length === 3
-    return (<MemoryRouter>
+    const {match} = this.props
+    const attributes = [{name: "Hallo", values:[{"active":true, "name": "trollo"},{"active":false}]},{name: "sdf", values:[{"active":true, "name": "Trollo"},{"active":false}]}]
+    const topics = [{name: "Hallo"},{name: "What"}]
+    const searchResults = [{"value": "hahaha", type:"attr"},{"value": "fsd", type:"topic"},{"value": "sdf", type:"attrValue"}]
+    return (
       <Wrapper>
-          
           <SecondaryNav >
-            <div style={{display:"flex",justifyContent:"flex-start",flex:1}}> 
+            {/* <div style={{display:"flex",justifyContent:"flex-start",flex:1}}> 
               <Button disabled={MAX_TOPICS_REACHED} onClick={this.props.onAddTopic}><i className="fas fas-3x fa-plus" ></i> Add Topic</Button>
             </div>
-            
-            <NavTab onClick={()=>this.props.onChangeActiveTabs(["description", "attributes", "users", "infoSettings"])} to="/info">
-              <i className="fas fa-info" ></i>  Info
+             */}
+            <NavTab to={`${match.url}/find`}>
+              <i className="fas fa-search" ></i>  Find
             </NavTab>
             
-            <NavTab onClick={()=>this.props.onChangeActiveTabs(["parts", "alternatives", "parents", "structureSettings"])} to="/structure">
+            <NavTab to={`${match.url}/compare`}>
                       
-              <i className="fas fa-sitemap" ></i>  Structure
+              <i className="fas fa-sitemap" ></i>  Compare
             </NavTab>
             
-            <NavTab onClick={()=>this.props.onChangeActiveTabs(["links", "procon", "stats", "tips", "learningSettings"])} to="/learning">
-              <i className="fas fa-lightbulb" ></i>  Learning
+            <NavTab to={`${match.url}/learn`}>
+              <i className="fas fa-lightbulb" ></i>  Learn
             </NavTab>
-            <NavTab to="/map">
-              <i className="fas fa-map" ></i>  Map
+            <div style={{display:"flex",justifyContent:"flex-end",flex:1}}>
+            <NavTab mini>
+              <i className="fas fa-save" ></i>
             </NavTab>
-              
-            <NavTab to="/detail">          
-              <i className="fas fa-search" ></i>  Detail
+            <NavTab mini>
+              <i className="fas fa-share" ></i>
             </NavTab>
+            </div>
           </SecondaryNav>
+          <SearchInput searchResults={searchResults} />
           
-          <TopicBar {...this.props} topics={this.props.topics} activeTabs={this.props.activeTabs} />        
-        
+          <div>
+            <Switch>
+              <Route path={`${match.path}/find`} render={()=><FindArea findAttributes={attributes} proposedAttributes={attributes} topics={this.props.topics} />} />
+              <Route path={`${match.path}/compare`} render={()=><CompareArea attributes={attributes} topics={this.props.topics} />} />
+              <Route path={`${match.path}/learn`} render={()=><LearnArea topics={this.props.topics}  />} />                  
+            </Switch>
+          </div>
+          <TopicArea topics={topics} maxTopics={3} />
       </Wrapper>
-      </MemoryRouter>
     );
   }
 }
 
 ExplorerPage.propTypes = {
- 
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -88,14 +102,14 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-      onChangeActiveTabs: (tabs)=>dispatch(changeActiveTabs(tabs)),
-      onChangeTopic: (position,name) => {
-        clearTimeout(topicChangeTimeout)
-        topicChangeTimeout = setTimeout(()=>{
-          dispatch(loadTopicData(position))
-        }, 1000)
-        return dispatch(changeTopicName(position,name))
-      },
+      onChangeSearchAttribute: (id)=>dispatch(changeSearchAttribute(id)),
+      // onChangeTopic: (position,name) => {
+      //   clearTimeout(topicChangeTimeout)
+      //   topicChangeTimeout = setTimeout(()=>{
+      //     dispatch(loadTopicData(position))
+      //   }, 1000)
+      //   return dispatch(changeTopicName(position,name))
+      // },
       onAddTopic: () => {
         return dispatch(addTopic(""))      
       },

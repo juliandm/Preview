@@ -12,7 +12,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import Wrapper from "./Wrapper"
 import Input from "components/Input"
-import Bar from "./Bar"
+import Bar from "components/InputBar"
 import cn from "classnames"
 import Error from "./Error"
 import Warning from "./Warning"
