@@ -10,7 +10,7 @@ import {
   SEARCH_ERROR,
   ADD_TOPIC,
   REMOVE_TOPIC,
-  LOAD_TOPIC,
+  LOAD_TOPICS,
   LOAD_TOPIC_ERROR,
   LOAD_TOPIC_SUCCESS
 } from './constants';
@@ -42,18 +42,18 @@ function explorerPageReducer(state = initialState(), action) {
         topics: state.topics.filter((topic,i) => topic.id !== action.id)
       }
       
-    case LOAD_TOPIC:
+    case LOAD_TOPICS:
       return {
         ...state,
         topics: state.topics.map(
-          (topic, i) => i === action.position ? {...topic, loading: true,error:false } : topic
+          (topic, i) => topic.attributes.length === 0 ? {...topic, loading: true,error:false } : topic
         ),
       }    
     case LOAD_TOPIC_SUCCESS:
       return {
         ...state,
         topics: state.topics.map(
-          (topic, i) => i === action.position ? {...topic, loading: false, changed:false, id:action.searchId} : topic
+          (topic, i) => topic.id === action.id ? {...topic,...action.topic, loading: false, changed:false} : topic
         )
       }         
     case LOAD_TOPIC_ERROR:

@@ -21,7 +21,7 @@ import injectSaga from 'utils/injectSaga';
 import reducer from "./reducer"
 import saga from "./saga.js"
 import * as selectors from "./selectors.js"
-import {search, loadTopic, addTopic, removeTopic} from './actions';
+import {search, loadTopics, addTopic, removeTopic} from './actions';
 import Map from "components/Map"
 import Button from "components/Button"
 import NavTab from "components/NavTab"
@@ -43,27 +43,38 @@ var topicChangeTimeout;
 
 
 export class ExplorerPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  componentDidMount() {
-    //Get Topics from url
+  constructor(props) {
+    super(props)
+    this.putTopicsInUrl = this.putTopicsInUrl.bind(this)
+    this.getTopicsFromUrl = this.getTopicsFromUrl.bind(this)
+  }
+  putTopicsInUrl() {
+    var topicIds = this.props.activeTopicIds || []
+    this.props.history.push({search: `?${qs.stringify({"t":topicIds},{arrayFormat: 'bracket'})}`})
+  }
+  getTopicsFromUrl() {
     const {search} = this.props.location
     const parsed = qs.parse(search,{arrayFormat: 'bracket'})
     console.log(parsed)
-    
     parsed.t && parsed.t.forEach((id,i)=>{
-      this.props.onAddTopic(id)
+      !this.props.activeTopicIds.includes(id) && this.props.onAddTopic(id)
     })
   }
+  componentDidMount() {
+    //Get Topics from url
+    this.getTopicsFromUrl()
+    // Put Topics in Url
+    this.putTopicsInUrl()
+   }
   componentDidUpdate(prevProps) {
     //Update Url with new Topics
     if (prevProps.topics !== this.props.topics) {
-      var topicIds = this.props.activeTopicIds || []
-      this.props.history.push({search: `?${qs.stringify({"t":topicIds},{arrayFormat: 'bracket'})}`})
+      this.putTopicsInUrl()
     }
   }
   render() {
     const MAX_TOPICS_REACHED = this.props.topics.length === 3
     const {match} = this.props
-    const attributes = [{name: "Hallo", values:[{"active":true, "name": "trollo"},{"active":false}]},{name: "sdf", values:[{"active":true, "name": "Trollo"},{"active":false}]}]
     console.log("mathc", this.props)
     return (
       <Wrapper>
@@ -85,12 +96,12 @@ export class ExplorerPage extends React.Component { // eslint-disable-line react
               <i className="fas fa-lightbulb" ></i>  Info
             </NavTab>
             <div style={{display:"flex",justifyContent:"flex-end",flex:1}}>
-            <NavTab mini>
-              <i className="fas fa-save" ></i>
-            </NavTab>
-            <NavTab mini>
-              <i className="fas fa-share" ></i>
-            </NavTab>
+              <NavTab mini>
+                <i className="fas fa-save" ></i>
+              </NavTab>
+              <NavTab mini>
+                <i className="fas fa-share" ></i>
+              </NavTab>
             </div>
           </SecondaryNav>
           <SearchInput  
@@ -104,7 +115,7 @@ export class ExplorerPage extends React.Component { // eslint-disable-line react
           
           <div>
             <Switch>
-              <Route path={`${match.path}/attributes`} render={()=><AttributeArea attributes={attributes}  topics={this.props.topics} />} />
+              <Route path={`${match.path}/attributes`} render={()=><AttributeArea attributesByTopic={this.props.attributes}  activeTopicIds={this.props.activeTopicIds} />} />
               <Route path={`${match.path}/structure`} render={()=><StructureArea  topics={this.props.topics} />} />
               <Route path={`${match.path}/info`} render={()=><InfoArea topics={this.props.topics}  />} />                  
             </Switch>
@@ -120,6 +131,7 @@ ExplorerPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
     topics: selectors.makeSelectTopics(),
+    attributes: selectors.makeSelectAttributes(),
     activeTopicIds: selectors.makeSelectTopicIds(),
     searching: selectors.makeSelectSearching(),    
     searchResults: selectors.makeSelectSearchResults()
@@ -132,7 +144,7 @@ function mapDispatchToProps(dispatch, props) {
 
         dispatch(addTopic(id))
 
-        dispatch(loadTopic(id)) 
+        dispatch(loadTopics()) 
       },
       onRemoveTopic: (id) => {
         return dispatch(removeTopic(id))      

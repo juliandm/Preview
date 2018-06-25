@@ -8,7 +8,7 @@ import media from "components/Helpers/media.js"
 const Wrapper = styled.div`
   border-right: 1px solid #666;
   width: 100%;
-
+  display: flex;
 `;
 
 
