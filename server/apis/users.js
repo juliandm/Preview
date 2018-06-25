@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const {User} = require("./../models/User")
+const bcrypt = require('bcrypt');
+const nanoid = require("nanoid");
 
 const generateToken = function(user) {
     return {
@@ -19,7 +21,7 @@ module.exports = router
     const {email, password} = req.body
     let response = {}
     
-    console.log(email, password, users)
+    console.log(email, password)
     // Fake Search query
     user = await User.findOne({email: email})
     console.log(user, user.password, password)

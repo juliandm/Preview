@@ -12,22 +12,15 @@ import messages from './messages';
 import Wrapper from "./Wrapper"
 import Attribute from "./Attribute"
 
-export default class FindArea extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+export default class AttributeArea extends React.Component {
 
   render () {
-    const {findAttributes, proposedAttributes} = this.props
+    const {attributes} = this.props
     return (
       <Wrapper>
-        {findAttributes.map((props,i)=>
+        {attributes.map((props,i) =>
           <Attribute key={props.name + props.values[0]} {...props} />
         )}
-        {proposedAttributes.map((props,i)=>
-          <Attribute key={props.name + props.values[0]} {...props} />
-        )}
-        <Attribute name={""} values={[]} />
       </Wrapper>
     );
   }

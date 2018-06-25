@@ -6,7 +6,6 @@ import { TransitionMotion, spring } from 'react-motion';
 class GroupTransition extends React.Component {
 
   render() {
-    console.log("RENDER GROUP", this.props.id)
     const { children, data, attributes, wrapperStyles={}, childWrapperStyles={} } = this.props
     const enterObj = {}, leaveObj={}, stylesObj={}
     attributes.forEach((id,i) => {
@@ -19,7 +18,7 @@ class GroupTransition extends React.Component {
     const willLeave = () => leaveObj;
 
     return <TransitionMotion
-      styles={children.map((child,i)=>{return {key:child.key, data: {child}, style: stylesObj} } )}
+      styles={children.map((child,i)=>{return {key:`${child.key}`, data: {child}, style: stylesObj} } )}
       willEnter={ willEnter }
       willLeave={ willLeave }
     >

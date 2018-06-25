@@ -7,7 +7,8 @@ import { LOAD, CHECK_TOPIC } from './constants';
 import { loadSuccess, loadError, checkTopicSuccess, loadEditorTab } from './actions';
 import {makeSelectTopicName, makeSelectTopicId, makeSelectData, selectEditorTab} from "./selectors"
 import {topicApi} from "services"
-const delay = (ms) => new Promise(res => setTimeout(res, ms))
+import delay from "helpers/delay"
+
 export function* checkTopicName() {
   try {
     //Simulate data on server

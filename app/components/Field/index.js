@@ -5,44 +5,75 @@
 */
 
 import React from 'react';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 import { Field as ReduxField } from 'redux-form'
-
+import {FloatIcon, FloatLabel, Bar, SearchResult, SearchResultHeader, SearchResultsWrapper} from "./SubComponents"
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import Wrapper from "./Wrapper"
 import Input from "components/Input"
-import Bar from "components/InputBar"
 import cn from "classnames"
 import Error from "./Error"
 import Warning from "./Warning"
-import FloatLabel from "./FloatLabel"
+import Button from "components/Button"
+import LoadingIndicator from "components/LoadingIndicator"
+const LoadingWrapper = styled.div`
+  right: 0;
+  top: 0;
+  display: flex;
+  height: 100%; 
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+`
 const renderField = ({
   input,
   label,
+  icon,
   type,
-  meta: { touched, error, warning, active }
-}) => (
+  expandRight,
+  searchResults,
+  onAddTopic,
+  loading,
+  meta: { touched, error, warning, active },
+  ...rest
+}) => {
+  console.log(rest)
+  const filled = input.value.length > 0 
+  return (
   <Wrapper>
-    <FloatLabel className={cn({"focused":active||input.value.length>0})} >{label}</FloatLabel>
+    {label && <FloatLabel focused={active||filled} >{label}</FloatLabel>}
+    {!loading && icon && <FloatIcon focused={active||filled} > <i className={`fas fa-${icon} fa-1x`} ></i>  </FloatIcon>}
+    <LoadingWrapper > 
+      <LoadingIndicator active={loading} small /> 
+    </LoadingWrapper>
     <Input {...input} placeholder={""} type={type}  />
-    <Bar className={cn({"focused":touched && (active||warning||error),"warning":touched && warning,"error":touched && error})} />
+    <Bar 
+      expandRight={expandRight} 
+      focused={active||warning||error} 
+      warning={touched && warning}
+      error={touched && error} 
+    />
     {touched &&
       ((error && <Error>{error}</Error>) ||
         (warning && <Warning>{warning}</Warning>))}
-    {/* <Bar  /> */}
-          
+    
+    {searchResults &&  <SearchResultsWrapper expanded={active && searchResults.length > 0} >
+          {searchResults.map(result=>
+              <SearchResult key={result.id} type={result.type} > <span style={{flex:1}} >{result.value}</span> 
+              <Button size="s" disabled={rest.MAX_TOPICS_REACHED||rest.activeTopicIds.includes(result.id)} onClick={()=>onAddTopic(result.id)} >+</Button>
+              </SearchResult>
+          )}
+      </SearchResultsWrapper>
+   }
   </Wrapper>
-)
+)}
 
-function Field({focused, ...rest}) {
+function Field(props) {
   return (
-      <ReduxField {...rest} component={renderField} />
+      <ReduxField {...props} component={renderField} />
   );
 }
-
-Field.propTypes = {
-
-};
 
 export default Field;

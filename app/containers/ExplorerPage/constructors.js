@@ -1,31 +1,24 @@
 
 
-// The initial state of the App
+// The initial state of the Explorer
 export const initialState = function (){
      return {
-        activeTabs: [],         
         topics: [],       
-        ...tabConstructor()
+        tree: {},
+        searching: false,
+        searchResults: []
     };
 }
-export const tabConstructor = function (){
+export const infoConstructor = function (){
     return {
-        //Learning
+        //Info
         links:[],
         procon:[], 
         stats:[], 
         tips:[],
-        learningSettings:[],
-        //Structure
-        parts:[], // shared and unique
-        alternatives:[], 
-        parents:[], 
-        structureSettings:[],
-        //Info
         description:[], 
         attributes:[], 
         users:[], // experts and mentors
-        infoSettings:[]
     }
 }
 var ID = function () {
@@ -34,13 +27,15 @@ var ID = function () {
     // after the decimal.
     return '_' + Math.random().toString(36).substr(2, 9);
   };
-export const topicConstructor = function (name="",id=ID(),error="No topic found", changed=false, loading=false){
+export const topicConstructor = function ({name="",id=ID(),error="No topic found", changed=false, loading=false}){
     return {
         "name":name,
         "id": id,
         "error":error,
         "changed":changed, 
-        "loading":loading
+        "loading":loading,        
+        "attributes": [],
+        "info": {...infoConstructor()}
     }
 }
   

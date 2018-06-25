@@ -227,6 +227,7 @@
     "lodash": "4.17.4",
     "minimist": "1.2.0",
     "prop-types": "15.5.10",
+    "query-string": "^6.1.0",
     "rc-animate": "2.4.4",
     "react": "16.4.0",
     "react-dom": "16.4.0",

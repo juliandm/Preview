@@ -48,7 +48,8 @@ class App extends React.Component {// TODO redirect to old history
     return (
       <Wrapper>
         <Header is_authenticated={this.props.loggedIn}  userLogout={this.props.userLogout} />
-        <Switch>
+        <div style={{flex:1}} >
+        <Switch  >
           <Route exact path="/" component={HomePage} />
           <Route path="/login" render={()=><LoginPage alertType={this.props.alertType} alertMessage={this.props.alertMessage} userLogin={this.props.userLogin} loggingIn={this.props.loggingIn} />} />
           <Route path="/register" render={()=><RegisterPage alertType={this.props.alertType} alertMessage={this.props.alertMessage} userRegister={this.props.userRegister} registering={this.props.registering} />} />
@@ -58,7 +59,7 @@ class App extends React.Component {// TODO redirect to old history
           <PrivateRoute loggedIn={this.props.loggedIn} path="/editor" component={EditorPage} />        
           <Route component={NotFoundPage} />
         </Switch>
-        
+        </div>
         <Footer />
       </Wrapper>
     );

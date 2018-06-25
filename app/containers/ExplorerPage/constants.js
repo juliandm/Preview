@@ -3,8 +3,10 @@
  * ExplorerPage constants
  *
  */
-export const CHANGE_ACTIVE_TABS = 'app/ExplorerPage/CHANGE_ACTIVE_TABS';
-export const CHANGE_TOPIC = 'app/ExplorerPage/CHANGE_TOPIC';
+export const SEARCH = 'app/ExplorerPage/SEARCH';
+export const SEARCH_SUCCESS = 'app/ExplorerPage/SEARCH_SUCCESS';
+export const SEARCH_ERROR = 'app/ExplorerPage/SEARCH_ERROR';
+
 export const ADD_TOPIC = 'app/ExplorerPage/ADD_TOPIC';
 export const REMOVE_TOPIC = 'app/ExplorerPage/REMOVE_TOPIC';
 export const LOAD_TOPIC = 'app/ExplorerPage/LOAD_TOPIC';

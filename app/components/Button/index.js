@@ -22,7 +22,7 @@ function Button({classType="primary",size,disabled=false, cut=false, ...props}) 
   const classes = cn(classType,size,{"disabled":disabled})
   // Render an anchor tag
   let button = (
-    <A href={props.href} className={classes} onClick={props.onClick}>
+    <A className={classes} {...props} >
       {Children.toArray(props.children)}
     </A>
   );

@@ -20,6 +20,12 @@ const Wrapper = styled.div`
   background: #f7f8f9;
   color: #445d6e;
   font-family: 'Raleway', sans-serif;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  overflow:hidden;
+  flex-direction: column;
 `;
 
 export default Wrapper;

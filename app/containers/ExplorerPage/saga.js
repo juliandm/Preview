@@ -3,33 +3,37 @@
  */
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { LOAD_TOPIC } from './constants';
-import { topicLoaded, topicLoadingError } from './actions';
+import { LOAD_TOPIC, SEARCH } from './constants';
+import { topicLoaded, topicLoadingError, searchSuccess } from './actions';
 
 // import request from 'utils/request';
-import { makeSelectTopics } from './selectors';
+import { makeSelectTopics, makeSelectSearchValue } from './selectors';
 import {topicDataConstructor} from "./constructors"
+import delay from "helpers/delay"
 
-var ID = function () {
-  return '_' + Math.random().toString(36).substr(2, 9);
-};
-export function* getTopicBarData() {
+
+export function* getSearchResults() {
+  console.log("SAGA SEARCH")
+  const searchResults = [{"id": "hahaha",value: "haha", type:"topic"},{"id": "fsd","value":"FSD", type:"topic"}]
+  // const searchValue = yield select(makeSelectSearchValue())
+  yield delay(500)
+  yield put(searchSuccess(searchResults));
+}
+
+export function* getTopicData() {
   // Select Topic Names from store
   const topics = yield select(makeSelectTopics());
   const data = {"links":{"title":"Hwattt","author": "Hehehe"}, "stats":";)"};
 
-  console.log("ASYNC")
   try {
     for (let i in topics) {
       const topic = topics[i]
-      if (topic.changed) {
+      if (topic.attributes.length === 0) {
         //Simulate topics on server
-        console.log("ASYNC 2")
         
         const serverTopics = [{id: "react", name: "react", data:Object.assign({},data)}]
         const topicById = serverTopics.filter(thistopic=>thistopic.name === topic.name)
         if (topicById.length > 0) {
-          console.log("ASYNC 3")
           
           yield put(topicLoaded(parseInt(i), topicById[0], ID()));
         } else {
@@ -48,10 +52,12 @@ export function* getTopicBarData() {
 /**
  * Root saga manages watcher lifecycle
  */
-export default function* TopicBarData() {
+export default function* ExplorerAsync() {
   // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
-  yield takeLatest(LOAD_TOPIC, getTopicBarData);
+  yield takeLatest(LOAD_TOPIC, getTopicData);
+  yield takeLatest(SEARCH, getSearchResults);
+  
 }

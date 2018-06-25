@@ -9,7 +9,6 @@ import styled from 'styled-components';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import Wrapper from "./Wrapper"
 import Button from "components/Button"
 
 // const Input = styled.input`
@@ -25,16 +24,15 @@ import Button from "components/Button"
 //     outline: none;
 //   }
 // `
-const TopicLabelWrapper = styled.div`
-  position: absolute;
-  left: 0;
-  height: 100%;
-  width: ${({split})=>split}%;
+const Wrapper = styled.div`
+  position: relative;
+  background: #445d6e;
+  width: 100%;
   display: flex;
   flex-direction: row;
 `
-const TopicLabel = styled.div`
-  background: #1488c6;
+
+const Topic = styled.div`
   border-radius: 1px;
   margin: 5px;
   color: white;
@@ -44,22 +42,25 @@ const TopicLabel = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  &:not(:first-child) {
+    border-left: 1px white solid;
+
+  }
 `
 
 class TopicInput extends React.Component {
   render() {
     const {maxTopics, topics} = this.props
-    const split = topics.length/maxTopics*100
+    // const split = topics.length/maxTopics*100
     return (
       <Wrapper>
-        <TopicLabelWrapper split={split}>
-          {topics.map(({name})=>
-            <TopicLabel>
-              {name}
-            </TopicLabel>
+          {topics.map(({id, name})=>
+            <Topic key={id} >
+              {id}
+              <Button size="s" onClick={()=>this.props.onRemoveTopic(id)} ><i className="fas fa-trash" ></i> </Button>
+            </Topic>
           )}
-        </TopicLabelWrapper>  
-      </Wrapper>
+      </Wrapper>  
     );
   }
 }
