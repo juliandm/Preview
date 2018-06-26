@@ -5,6 +5,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { LOAD_TOPICS, SEARCH } from './constants';
 import { topicLoaded, topicLoadingError, searchSuccess } from './actions';
+import {mainApi} from "services"
 
 // import request from 'utils/request';
 import { makeSelectTopics, makeSelectSearchValue } from './selectors';
@@ -14,30 +15,28 @@ import delay from "helpers/delay"
 
 export function* getSearchResults() {
   console.log("SAGA SEARCH")
-  const searchResults = [{"id": "react",value: "react", type:"topic"},{"id": "fsd","value":"FSD", type:"topic"}]
-  // const searchValue = yield select(makeSelectSearchValue())
-  yield delay(500)
+  // const searchResults = [{"id": "react",value: "react", type:"topic"},{"id": "fsd","value":"FSD", type:"topic"}]
+  const searchValue = yield select(makeSelectSearchValue())
+  const searchResults = yield call(mainApi,{method: "GET",path:["search","topics",searchValue]})
+  console.log(searchResults)
   yield put(searchSuccess(searchResults));
 }
 
 export function* getTopicData() {
   // Select Topic Names from store
   const topics = yield select(makeSelectTopics());
-  const data = {"links":{"title":"Hwattt","author": "Hehehe"}, "stats":";)"};
-  const attributes = [{name: "Hallo", values:[{"active":true, "name": "trollo"},{"active":false}]},{name: "sdf", values:[{"active":true, "name": "Trollo"},{"active":false}]}]
 
   try {
     for (let topic of topics) {
+      //Attributes
       if (topic.attributes.length === 0) {
         //Simulate topics on server
-        
-        const serverTopics = [{id: "react", name: "react", attributes:attributes}]
-        const topicById = serverTopics.filter(thistopic=>thistopic.id === topic.id)
-        if (topicById.length > 0) {
-          
-          yield put(topicLoaded(topic.id, topicById[0]));
+        const topicData = yield call(mainApi,{method: "GET",path:["topics",topic.id]})
+        console.log(topicData)
+        if (topicData) {
+          yield put(topicLoaded({id:topic.id,topic:{...topicData} }));
         } else {
-          yield put(topicLoadingError(topic.id,"Not found in system"));
+          yield put(topicLoadingError(topic.id,"No attributes yet"));
         }
       }
     }

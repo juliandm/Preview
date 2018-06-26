@@ -34,7 +34,7 @@ function explorerPageReducer(state = initialState(), action) {
     case ADD_TOPIC:
       return {
         ...state,
-        topics: [...state.topics, topicConstructor({id: action.id})],
+        topics: [...state.topics, topicConstructor({...action.fields})],
       }    
     case REMOVE_TOPIC:
       return {

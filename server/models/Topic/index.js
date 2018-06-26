@@ -1,16 +1,15 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const findOrCreate = require('mongoose-find-or-create')
  
-
-module.exports.Topic = mongoose.model('Topic', new Schema({
+var TopicSchema = new Schema({
   name: String,
   label: String, // Industry Standard, Newcomer
   stats: {type: Schema.Types.ObjectId, ref: 'Stats'},
   links: String,
-  description: {type: Schema.Types.ObjectId, ref: 'Description'},
-  attributes: [{type: Schema.Types.ObjectId, ref: 'Attribute'}],
+  attributePairs: [{type: Schema.Types.ObjectId, ref: 'AttributePair'}],
   procons: [{type: Schema.Types.ObjectId, ref: 'Procon'}],
-
+  description: {type: Schema.Types.ObjectId, ref: 'Description'},
   users: [{type: Schema.Types.ObjectId, ref: 'User'}]
 }, {
   timestamps: {
@@ -18,5 +17,9 @@ module.exports.Topic = mongoose.model('Topic', new Schema({
     updatedAt: 'updatedAt'
   }
 })
- 
-)
+
+TopicSchema.statics.findOneOrCreate = async function (condition, doc) {
+  const one = await this.findOne(condition);
+  return one || this.create(doc);
+};
+module.exports.Topic = mongoose.model('Topic', TopicSchema)

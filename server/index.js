@@ -10,12 +10,25 @@ const isDev = process.env.NODE_ENV !== 'production';
 const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false;
 const resolve = require('path').resolve;
 const app = express();
-const nanoid = require("nanoid");
 var bodyParser = require('body-parser')
-const bcrypt = require('bcrypt');
 var mongoose = require('mongoose');
 var apis = require('./apis');
 
+// DB
+mongoose.connect('mongodb://localhost:27017');
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open',()=>{console.log("Db connected")});
+
+// Parsing
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// //Logging
+// app.use((req,res,next)=>{console.log(req.url); next()})
+
+//Apis
+app.use("/api", apis)
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
@@ -28,18 +41,6 @@ const customHost = argv.host || process.env.HOST;
 const host = customHost || null; // Let http.Server use its default IPv6/4 host
 const prettyHost = customHost || 'localhost';
 
-// DB
-mongoose.connect('mongodb://localhost:27017');
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open',()=>{console.log("Db connected")});
-
-// Parsing
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-
-//Apis
-app.use("/api", apis)
 
 // Start your app.
 app.listen(port, host, (err) => {

@@ -35,7 +35,7 @@ const renderField = ({
   expandRight,
   searchResults,
   onAddTopic,
-  loading,
+  loading=false,
   meta: { touched, error, warning, active },
   ...rest
 }) => {
@@ -61,8 +61,8 @@ const renderField = ({
     
     {searchResults &&  <SearchResultsWrapper expanded={active && searchResults.length > 0} >
           {searchResults.map(result=>
-              <SearchResult key={result.id} type={result.type} > <span style={{flex:1}} >{result.value}</span> 
-              <Button size="s" disabled={rest.MAX_TOPICS_REACHED||rest.activeTopicIds.includes(result.id)} onClick={()=>onAddTopic(result.id)} >+</Button>
+              <SearchResult key={result._id} > <span style={{flex:1}} >{result.name}</span> 
+              <Button size="s" disabled={rest.MAX_TOPICS_REACHED||rest.activeTopicIds.includes(result._id)} onClick={()=>onAddTopic({id:result._id, name:result.name})} >+</Button>
               </SearchResult>
           )}
       </SearchResultsWrapper>

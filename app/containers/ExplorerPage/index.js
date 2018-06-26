@@ -31,6 +31,7 @@ import AttributeArea from "./Areas/AttributeArea"
 import InfoArea from "./Areas/InfoArea"
 import StructureArea from "./Areas/StructureArea"
 import SearchInput from "./SearchInput"
+
 var topicChangeTimeout;
 
 
@@ -57,7 +58,8 @@ export class ExplorerPage extends React.Component { // eslint-disable-line react
     const parsed = qs.parse(search,{arrayFormat: 'bracket'})
     console.log(parsed)
     parsed.t && parsed.t.forEach((id,i)=>{
-      !this.props.activeTopicIds.includes(id) && this.props.onAddTopic(id)
+      console.log(!this.props.activeTopicIds.includes(id))
+      !this.props.activeTopicIds.includes(id) && this.props.onAddTopic({id})
     })
   }
   componentDidMount() {
@@ -75,7 +77,6 @@ export class ExplorerPage extends React.Component { // eslint-disable-line react
   render() {
     const MAX_TOPICS_REACHED = this.props.topics.length === 3
     const {match} = this.props
-    console.log("mathc", this.props)
     return (
       <Wrapper>
           <SecondaryNav >
@@ -112,14 +113,15 @@ export class ExplorerPage extends React.Component { // eslint-disable-line react
             activeTopicIds={this.props.activeTopicIds}
             searching={this.props.searching}
           />
-          
-          <div>
+
+           <div>
             <Switch>
-              <Route path={`${match.path}/attributes`} render={()=><AttributeArea attributesByTopic={this.props.attributes}  activeTopicIds={this.props.activeTopicIds} />} />
+              <Route path={`${match.path}/attributes`} render={()=><AttributeArea loading={this.props.loading} attributePairsByTopic={this.props.attributePairs}  activeTopicIds={this.props.activeTopicIds} />} />
               <Route path={`${match.path}/structure`} render={()=><StructureArea  topics={this.props.topics} />} />
               <Route path={`${match.path}/info`} render={()=><InfoArea topics={this.props.topics}  />} />                  
             </Switch>
           </div>
+          
           <TopicArea onRemoveTopic={this.props.onRemoveTopic} topics={this.props.topics} MAX_TOPICS_REACHED={MAX_TOPICS_REACHED} />
       </Wrapper>
     );
@@ -131,9 +133,10 @@ ExplorerPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
     topics: selectors.makeSelectTopics(),
-    attributes: selectors.makeSelectAttributes(),
+    attributePairs: selectors.makeSelectAttributePairs(),
     activeTopicIds: selectors.makeSelectTopicIds(),
     searching: selectors.makeSelectSearching(),    
+    loading: selectors.makeSelectLoading(),        
     searchResults: selectors.makeSelectSearchResults()
 })
 

@@ -27,14 +27,14 @@ var ID = function () {
     // after the decimal.
     return '_' + Math.random().toString(36).substr(2, 9);
   };
-export const topicConstructor = function ({name="",id=ID(),error="No topic found", changed=false, loading=false}){
+export const topicConstructor = function ({name="",id,error="No topic found", changed=false, loading=false}){
     return {
         "name":name,
         "id": id,
         "error":error,
         "changed":changed, 
         "loading":loading,        
-        "attributes": [],
+        "attributePairs": [],
         "info": {...infoConstructor()}
     }
 }

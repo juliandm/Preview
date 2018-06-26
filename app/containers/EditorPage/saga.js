@@ -6,7 +6,7 @@ import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { LOAD, CHECK_TOPIC } from './constants';
 import { loadSuccess, loadError, checkTopicSuccess, loadEditorTab } from './actions';
 import {makeSelectTopicName, makeSelectTopicId, makeSelectData, selectEditorTab} from "./selectors"
-import {topicApi} from "services"
+import {mainApi} from "services"
 import delay from "helpers/delay"
 
 export function* checkTopicName() {

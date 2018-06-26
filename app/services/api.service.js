@@ -1,19 +1,18 @@
 import config from 'config';
-
-function serialize( obj ) {
-    return '?'+Object.keys(obj).reduce(function(a,k){a.push(k+'='+encodeURIComponent(obj[k]));return a},[]).join('&')
-}
-
+import qs from "query-string"
 //action: GET,PUT.. path: /topics/34.. 
-export function topicApi({method,id, path=[], body={}, query={} }) { 
+export function mainApi({method, path=[], body={}, query={} }) { 
     const requestOptions = {
         method: method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ body })
+        // body: method !== "GET" && JSON.stringify({ body })
     };
     // /structure/depth, 
-    return fetch(`${config.apiUrl}/topics/${id && id + "/"}${path.join("/")}${query && "?" + serialize(query)}`, requestOptions)
+    const urlString = `${config.apiUrl}/${path.length > 0 ? path.join("/"): ""}${Object.keys(query).length > 0 ? "?" + qs.stringify(query): ""}`
+    console.log(urlString)
+    return fetch(urlString, requestOptions)
         .then(handleResponse)
+        .then((res)=>res)
 }
 
 function handleResponse(response) {

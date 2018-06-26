@@ -44,7 +44,6 @@ export const PrivateRoute = ({ component: Component,loggedIn, ...rest }) => (
 
 class App extends React.Component {// TODO redirect to old history
   render () {
-    console.log(this.props.loggedIn)
     return (
       <Wrapper>
         <Header is_authenticated={this.props.loggedIn}  userLogout={this.props.userLogout} />
@@ -75,7 +74,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, props) {
   return {
     userRegister: (from) => dispatch(registerRequest(from)),    
     userLogin: (from) => dispatch(loginRequest(from)),

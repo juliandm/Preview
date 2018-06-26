@@ -15,12 +15,12 @@ import {
 export function search() {return {type: SEARCH}}
 export function searchSuccess(results) {return {type: SEARCH_SUCCESS,results}}
 
-export function addTopic(id) {return {type: ADD_TOPIC,id}}
+export function addTopic(fields) {return {type: ADD_TOPIC,fields}}
 export function removeTopic(id) {return {type: REMOVE_TOPIC,id};}
 
 export function loadTopics() {return {type: LOAD_TOPICS}}
 
-export function topicLoaded(id, topic) {return {type: LOAD_TOPIC_SUCCESS,id, topic}}
+export function topicLoaded({id, topic}) {return {type: LOAD_TOPIC_SUCCESS,id, topic}}
 
 export function topicLoadingError(id,error) {return {type: LOAD_TOPIC_ERROR,id,error}}
 

@@ -56,7 +56,7 @@ class TopicInput extends React.Component {
       <Wrapper>
           {topics.map(({id, name})=>
             <Topic key={id} >
-              {id}
+              {name}
               <Button size="s" onClick={()=>this.props.onRemoveTopic(id)} ><i className="fas fa-trash" ></i> </Button>
             </Topic>
           )}
