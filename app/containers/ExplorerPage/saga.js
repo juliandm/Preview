@@ -25,11 +25,11 @@ export function* getSearchResults() {
 export function* getTopicData() {
   // Select Topic Names from store
   const topics = yield select(makeSelectTopics());
-
+console.log("LOAD SAGA")
   try {
     for (let topic of topics) {
       //Attributes
-      if (topic.attributes.length === 0) {
+      if (topic.attributePairs.length === 0) {
         //Simulate topics on server
         const topicData = yield call(mainApi,{method: "GET",path:["topics",topic.id]})
         console.log(topicData)

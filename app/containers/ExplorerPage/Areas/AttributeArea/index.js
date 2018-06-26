@@ -43,13 +43,13 @@ export default class AttributeArea extends React.Component {
   // go through AttributePairs and find same, different and no match 
   renderAttributeRow(attrRow,i) {
     return (
-        <AttributeRow key={`${attrRow.name}${i}`} > 
-          <AttributeLabel> {attrRow.name} </AttributeLabel>
+        <AttributeRow key={attrRow.attribute._id} > 
+          <AttributeLabel> {attrRow.attribute.name} </AttributeLabel>
           <AttributeValuesWrapper>
             {/* <GroupTransition childWrapperStyles={{}} wrapperStyles={{  }} AttributePairs={["opacity","scale"]} data={[[0,0.98],[0,1.2],[1,1]]} > */}
-              {attrRow.values.map((value,j) =>
-                  <AttributeValue key={`${value}${j}`} id={value}> 
-                    {value}
+              {attrRow.values.map((attrValue,j) =>
+                  <AttributeValue key={`${attrValue._id}${j}`}> 
+                    {attrValue.value}
                   </AttributeValue>
               )}
             {/* </GroupTransition>     */}
@@ -64,7 +64,7 @@ export default class AttributeArea extends React.Component {
     const saveAttributePairsByTopic = [...mutableAttributePairsByTopic.map(attr=>[...attr])]
     
     // AttributePairsByTopic = [
-    //   [{"value":1, "name": 1}, {"value":1, "name": 2},{"value":1, "name": 3},{"value":1, "name": 4}],
+    //   [{"value":1, "attribute.name": 1}, {"value":1, "name": 2},{"value":1, "name": 3},{"value":1, "name": 4}],
     //   [{"value":2, "name": 2}, {"value":1, "name": 5},{"value":1, "name": 6},{"value":1, "name": 7}],
     //   [{"value":1, "name": 1}, {"value":1, "name": 2}]            
     // ]
@@ -72,12 +72,12 @@ export default class AttributeArea extends React.Component {
     for (let activeTopic of saveAttributePairsByTopic) {
       // Has to be backwards because we are reducing array
       for (let i=activeTopic.length-1; i >=0; --i){
-        let activeAttr = activeTopic[i]
-        let thisRow = {"name": activeAttr.name, "values":[]}
+        let activeAttrPair = activeTopic[i]
+        let thisRow = {"attribute": activeAttrPair.attribute, "values":[]}
         let matchCounter = 0
         
         for (let compareTopic of saveAttributePairsByTopic){
-          let foundI = compareTopic.findIndex(compareAttr=>compareAttr.name === activeAttr.name)
+          let foundI = compareTopic.findIndex(compareAttrPair=>compareAttrPair.attribute.name === activeAttrPair.attribute.name)
           let foundEl = compareTopic[foundI]
           // Push to Row
           thisRow.values.push(foundEl ? foundEl.value : false)
@@ -95,9 +95,9 @@ export default class AttributeArea extends React.Component {
     return matches
   }
   render () {
-    const {AttributePairsByTopic, activeTopicIds, loading} = this.props
-    const matches = this.categorizeAttributePairs(AttributePairsByTopic)
-    console.log(matches,this.props.AttributePairsByTopic, "Attribute")
+    const {attributePairsByTopic, activeTopicIds, loading} = this.props
+    const matches = this.categorizeAttributePairs(attributePairsByTopic)
+    console.log(matches,this.props.attributePairsByTopic, "Attribute")
 
     return (
       <Wrapper>

@@ -32,6 +32,7 @@ function explorerPageReducer(state = initialState(), action) {
         searchResults: action.results
       }          
     case ADD_TOPIC:
+    console.log(action.fields)
       return {
         ...state,
         topics: [...state.topics, topicConstructor({...action.fields})],
@@ -43,13 +44,17 @@ function explorerPageReducer(state = initialState(), action) {
       }
       
     case LOAD_TOPICS:
+    console.log("Load")
+    
       return {
         ...state,
         topics: state.topics.map(
-          (topic, i) => topic.attributes.length === 0 ? {...topic, loading: true,error:false } : topic
+          (topic, i) => topic.attributePairs.length === 0 ? {...topic, loading: true,error:false } : topic
         ),
       }    
     case LOAD_TOPIC_SUCCESS:
+    console.log("Succ")
+    
       return {
         ...state,
         topics: state.topics.map(

@@ -54,7 +54,10 @@ module.exports = router
 .get("/:id",async (req, res, next) => {
     const OneTopic = await Topic
     .findOne({"_id": mongoose.Types.ObjectId(req.params.id)})
-    .populate("attributes")
+    .populate({
+        path: 'attributePairs',
+        populate: [{ path: 'value' },{ path: 'attribute' }]
+      })
     
     console.log(OneTopic)
     res.send(OneTopic)
