@@ -20,7 +20,7 @@ export function removeTopic(id) {return {type: REMOVE_TOPIC,id};}
 
 export function loadTopics() {return {type: LOAD_TOPICS}}
 
-export function topicLoaded({id, topic}) {return {type: LOAD_TOPIC_SUCCESS,id, topic}}
+export function topicsLoaded({attributes, topics, tree, info}) {return {type: LOAD_TOPIC_SUCCESS,attributes, topics, tree, info}}
 
-export function topicLoadingError(id,error) {return {type: LOAD_TOPIC_ERROR,id,error}}
+export function topicsLoadingError(id,error) {return {type: LOAD_TOPIC_ERROR,id,error}}
 

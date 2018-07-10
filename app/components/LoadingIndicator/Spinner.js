@@ -24,8 +24,7 @@ const Wrapper = styled.div`
   }
   color: #000000;
   text-indent: -9999em;
-  margin: 88px auto;
-  position: relative;
+
   font-size: 11px;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);

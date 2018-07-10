@@ -4,7 +4,8 @@ const Wrapper = styled.div`
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  background: #e6edf4;
+  background: #445d6e;
+  color: white;
   border-bottom: solid 1px #d7dfe8;
 `;
 

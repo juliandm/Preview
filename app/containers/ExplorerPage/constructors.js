@@ -5,20 +5,26 @@ export const initialState = function (){
      return {
         topics: [],       
         tree: {},
+        loading: false,
+        changed: false,
+        error: "",
+        attributes: [],
+        info: {...infoConstructor()},
         searching: false,
-        searchResults: []
+        searchResults: [],
+        
+        description:[],         
+        links:[],
+        procon:[], 
+        stats:[], 
+        tips:[],
+        users:[], // experts and mentors
     };
 }
 export const infoConstructor = function (){
     return {
         //Info
-        links:[],
-        procon:[], 
-        stats:[], 
-        tips:[],
-        description:[], 
-        attributes:[], 
-        users:[], // experts and mentors
+
     }
 }
 var ID = function () {
@@ -30,12 +36,7 @@ var ID = function () {
 export const topicConstructor = function ({name="",id,error="No topic found", changed=false, loading=false}){
     return {
         "name":name,
-        "id": id,
-        "error":error,
-        "changed":changed, 
-        "loading":loading,        
-        "attributePairs": [],
-        "info": {...infoConstructor()}
+        "_id": id,
     }
 }
   

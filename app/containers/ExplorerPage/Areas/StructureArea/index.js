@@ -9,22 +9,18 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import { withRouter } from 'react-router'
-
-import {Route, MemoryRouter} from "react-router-dom"
-import Wrapper from "./Wrapper"
-
-export  class CompareArea extends React.Component {
+import Area from "./../Area"
+export default class StructureArea extends React.Component {
 
   render () {
 
     return (
-      <Wrapper>
+      <Area title={"Structure"} >
+        Number of users
 
-      </Wrapper>
+
+      </Area>
     );
   }
 
 }
-
-export default CompareArea

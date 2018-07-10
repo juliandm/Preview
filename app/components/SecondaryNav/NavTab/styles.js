@@ -5,10 +5,7 @@ export default css`
   overflow: hidden; // Hide the Title if it gets too small
   text-transform: capitalize;
   height: 64px;
-  color: #445d6e;
-  font-weight: 400;
-  font-size: 14px;
-
+  color: white;
   line-height: 44px;
   min-width: ${({mini})=> !mini ? "70px" : "40px"};
   border-radius: 0;

@@ -22,26 +22,20 @@ import reducer from "./reducer"
 import saga from "./saga.js"
 import * as selectors from "./selectors.js"
 import {search, loadTopics, addTopic, removeTopic} from './actions';
-import Map from "components/Map"
 import Button from "components/Button"
-import NavTab from "components/NavTab"
+import NavTab from "components/SecondaryNav/NavTab"
+import NavTitle from "components/SecondaryNav/NavTitle"
+import NavSeparator from "components/SecondaryNav/NavSeparator"
+
 import Wrapper from "./Wrapper"
 import TopicArea from "./Areas/TopicArea"
 import AttributeArea from "./Areas/AttributeArea"
 import InfoArea from "./Areas/InfoArea"
 import StructureArea from "./Areas/StructureArea"
 import SearchInput from "./SearchInput"
+import {mainApi} from "services"
 
 var topicChangeTimeout;
-
-
-// Nav responsible for
-// Select: Auswahl der Tabs
-
-// Buttons: Add, Share
-
-// Settings: Split Screen
-
 
 export class ExplorerPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -51,6 +45,7 @@ export class ExplorerPage extends React.Component { // eslint-disable-line react
   }
   putTopicsInUrl() {
     var topicIds = this.props.activeTopicIds || []
+    
     this.props.history.push({search: `?${qs.stringify({"t":topicIds},{arrayFormat: 'bracket'})}`})
   }
   getTopicsFromUrl() {
@@ -65,13 +60,15 @@ export class ExplorerPage extends React.Component { // eslint-disable-line react
   componentDidMount() {
     //Get Topics from url
     this.getTopicsFromUrl()
+    
     // Put Topics in Url
     this.putTopicsInUrl()
    }
   componentDidUpdate(prevProps) {
     //Update Url with new Topics
-    if (prevProps.topics !== this.props.topics) {
+    if (this.props.changed && !this.props.loading) {
       this.putTopicsInUrl()
+      this.props.onLoadTopics()
     }
   }
   render() {
@@ -80,31 +77,6 @@ export class ExplorerPage extends React.Component { // eslint-disable-line react
     return (
       <Wrapper>
           <SecondaryNav >
-            {/* <div style={{display:"flex",justifyContent:"flex-start",flex:1}}> 
-              <Button disabled={MAX_TOPICS_REACHED} onClick={this.props.onAddTopic}><i className="fas fas-3x fa-plus" ></i> Add Topic</Button>
-            </div>
-             */}
-            <NavTab to={{pathname:`${match.url}/attributes`,search:this.props.location.search}}>
-              <i className="fas fa-puzzle-piece" ></i>  Attributes
-            </NavTab>
-            
-            <NavTab to={{pathname:`${match.url}/structure`,search:this.props.location.search}}>
-                      
-              <i className="fas fa-sitemap" ></i>  Structure
-            </NavTab>
-            
-            <NavTab to={{pathname:`${match.url}/info`,search:this.props.location.search}}>
-              <i className="fas fa-lightbulb" ></i>  Info
-            </NavTab>
-            <div style={{display:"flex",justifyContent:"flex-end",flex:1}}>
-              <NavTab mini>
-                <i className="fas fa-save" ></i>
-              </NavTab>
-              <NavTab mini>
-                <i className="fas fa-share" ></i>
-              </NavTab>
-            </div>
-          </SecondaryNav>
           <SearchInput  
             MAX_TOPICS_REACHED={MAX_TOPICS_REACHED} 
             searchResults={this.props.searchResults}
@@ -113,16 +85,44 @@ export class ExplorerPage extends React.Component { // eslint-disable-line react
             activeTopicIds={this.props.activeTopicIds}
             searching={this.props.searching}
           />
+            {/* <div style={{display:"flex",justifyContent:"flex-end",flex:1}}> */}
+              {/* <NavTab>
+                <i className="fas fa-sitemap" ></i>  Map
+              </NavTab>
+              <NavTab>
+                <i className="fas fa-list-ul" ></i>  List
+              </NavTab>
+              <NavTab>
+                <i className="fas fa-info" ></i>  Info
+              </NavTab> */}
+            {/* </div> */}
+            <div style={{display:"flex",justifyContent:"flex-end"}}>
+              <NavTab mini>
+                <i className="fas fa-cog" ></i>
+              </NavTab>
+              <NavTab mini>
+                <i className="fas fa-save" ></i>
+              </NavTab>
+              <NavTab mini>
+                <i className="fas fa-share" ></i>
+              </NavTab>
+            </div>
+          </SecondaryNav>
 
-           <div>
-            <Switch>
-              <Route path={`${match.path}/attributes`} render={()=><AttributeArea loading={this.props.loading} attributePairsByTopic={this.props.attributePairs}  activeTopicIds={this.props.activeTopicIds} />} />
-              <Route path={`${match.path}/structure`} render={()=><StructureArea  topics={this.props.topics} />} />
-              <Route path={`${match.path}/info`} render={()=><InfoArea topics={this.props.topics}  />} />                  
-            </Switch>
+
+           <div style={{padding: "10px"}} >
+
+          <TopicArea  onRemoveTopic={this.props.onRemoveTopic} topics={this.props.topics} MAX_TOPICS_REACHED={MAX_TOPICS_REACHED} />
+             
+              <AttributeArea 
+                loading={this.props.loading}
+                attributesByTopic={this.props.attributes}  
+                activeTopicIds={this.props.activeTopicIds} />
+              <InfoArea topics={this.props.topics}  />  
+              <StructureArea  topics={this.props.topics} />
+                           
           </div>
           
-          <TopicArea onRemoveTopic={this.props.onRemoveTopic} topics={this.props.topics} MAX_TOPICS_REACHED={MAX_TOPICS_REACHED} />
       </Wrapper>
     );
   }
@@ -133,7 +133,8 @@ ExplorerPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
     topics: selectors.makeSelectTopics(),
-    attributePairs: selectors.makeSelectAttributePairs(),
+    changed: selectors.makeSelectChanged(),    
+    attributes: selectors.makeSelectAttributes(),
     activeTopicIds: selectors.makeSelectTopicIds(),
     searching: selectors.makeSelectSearching(),    
     loading: selectors.makeSelectLoading(),        
@@ -143,15 +144,9 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch, props) {
   return {
       onSearch: ()=>{console.log("Search");return dispatch(search())},
-      onAddTopic: (id) => {
-
-        dispatch(addTopic(id))
-
-        dispatch(loadTopics()) 
-      },
-      onRemoveTopic: (id) => {
-        return dispatch(removeTopic(id))      
-      },
+      onAddTopic: (id) => dispatch(addTopic(id)),
+      onRemoveTopic: (id)=>dispatch(removeTopic(id)) ,
+      onLoadTopics: ()=>dispatch(loadTopics()) 
   }
 }
 

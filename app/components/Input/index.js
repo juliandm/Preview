@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.input`
 
-border-radius: 0;
+border-radius: 1px;
 background-color: transparent;
 display: block;
 font-family: inherit;
@@ -17,10 +17,13 @@ border-bottom: 1px solid #cbcbcb;
 margin: 0;
 color: #465f77;
 outline: none;
+background: #e6edf4ad;
 
 &:hover, &:active, &:focus {
     background: #ececec;
     background: #e6edf473;
+background: #e6edf4db;
+    
 }
 
 

@@ -12,10 +12,10 @@ export default defineMessages({
   },
   explorer: {
     id: 'boilerplate.components.Header.explorer',
-    defaultMessage: 'Explorer',
+    defaultMessage: 'Explore',
   },
   editor: {
     id: 'boilerplate.components.Header.editor',
-    defaultMessage: 'Editor',
+    defaultMessage: 'Contribute',
   },
 });

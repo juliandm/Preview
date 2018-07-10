@@ -2,13 +2,15 @@ import config from 'config';
 import qs from "query-string"
 //action: GET,PUT.. path: /topics/34.. 
 export function mainApi({method, path=[], body={}, query={} }) { 
+    console.log(query, "API")
+    
     const requestOptions = {
         method: method,
         headers: { 'Content-Type': 'application/json' },
         // body: method !== "GET" && JSON.stringify({ body })
     };
     // /structure/depth, 
-    const urlString = `${config.apiUrl}/${path.length > 0 ? path.join("/"): ""}${Object.keys(query).length > 0 ? "?" + qs.stringify(query): ""}`
+    const urlString = `${config.apiUrl}/${path.length > 0 ? path.join("/"): ""}${Object.keys(query).length > 0 ? "?" + qs.stringify(query,{arrayFormat: 'bracket'}): ""}`
     console.log(urlString)
     return fetch(urlString, requestOptions)
         .then(handleResponse)

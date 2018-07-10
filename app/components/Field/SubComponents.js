@@ -6,19 +6,19 @@ export const FloatLabel = styled.span`
     pointer-events: none;
     transition: all .2s ease;
     font-size: ${props=>props.focused ? "0.6rem" : "0.875rem"};
-    color: ${props=>props.focused ? "0.6rem" : "0.875rem"};
     bottom: ${props=>props.focused ? "#22b8eb" : "grey"};
     left: 0;
 `;
-export const Input = styled.input`
-    height: 40px;
-    width: 100%;
-    font-size: 1.5rem;
-    border-bottom: 1px solid rgba(0,0,0,0.2);
-    &:focus{
-        outline: none;
-    }
-`
+export const Placeholder = styled.span`
+    position: absolute;
+    display: block;
+    pointer-events: none;
+    transition: all .2s ease;
+    opacity: ${props=>props.focused ? "0" : "1"};
+    color: #445d6e;
+    left: 25px;
+`;
+
 export const FloatIcon = styled.div`
     position: absolute;
     top: 0;
@@ -27,15 +27,17 @@ export const FloatIcon = styled.div`
     align-items: center;
     justify-content: center;
     width: 40px;
-    opacity: 0.3;
     pointer-events: none;
     transition: all 0.2s ease;
+    color:#445d6e;
+    
     left: ${props=>props.focused ? "calc(100% - 40px)" : "0px"};
+    opacity: ${props=>props.focused ? "1" : "0.3"};
+    
 `
 
 export const SearchResultsWrapper = styled.div`
     position: absolute;
-    top: 100%;
     left: 0;
     width: 100%;
     color: white;
@@ -43,13 +45,14 @@ export const SearchResultsWrapper = styled.div`
     border-radius: 1px;
     background: ${({expanded})=> expanded?"rgba(68,93,110,0.9)": "transparent"};
     opacity: ${({expanded})=> expanded? "1": "0"};
-    z-index: ${({expanded})=> expanded? "2": "-1"};
+    z-index: ${({expanded})=> expanded? "200": "-100"};
 `
 export const SearchResult = styled.div`
     padding: 2px;
     cursor: pointer;
     transition: all 0.02s; 
     display: flex;
+    z-index: 2;
 
     &:hover {
         background: #22b8eb;

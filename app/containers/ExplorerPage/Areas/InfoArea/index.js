@@ -9,20 +9,21 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import Wrapper from "./Wrapper"
-export class LearnArea extends React.Component {
+import Area from "./../Area"
+import {renderAttributeRow} from "../SubComponents"
+import GroupTransition from "components/GroupTransition"
+
+export default class InfoArea extends React.Component {
 
   render () {
 
 
     return (
-      <Wrapper>
+      <Area title={"Info"} >
 
 
-      </Wrapper>
+      </Area>
     );
   }
 
 }
-
-export default LearnArea

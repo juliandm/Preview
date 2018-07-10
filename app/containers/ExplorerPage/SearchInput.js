@@ -12,8 +12,15 @@ import Field from "components/Field"
 import LoadingIndicator from "components/LoadingIndicator"
 const Wrapper = styled.div`
 position: relative;
-margin: 0px 5px;
-margin-bottom: 10px;
+flex: 1;
+padding: 0 10px;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+> div {
+    width: 100%;
+}
+
 `
 
 

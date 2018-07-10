@@ -20,11 +20,8 @@ import LoadingIndicator from "components/LoadingIndicator"
 const LoadingWrapper = styled.div`
   right: 0;
   top: 0;
-  display: flex;
   height: 100%; 
   position: absolute;
-  justify-content: center;
-  align-items: center;
   width: 40px;
 `
 const renderField = ({
@@ -39,12 +36,11 @@ const renderField = ({
   meta: { touched, error, warning, active },
   ...rest
 }) => {
-  console.log(rest)
   const filled = input.value.length > 0 
   return (
   <Wrapper>
     {label && <FloatLabel focused={active||filled} >{label}</FloatLabel>}
-    {!loading && icon && <FloatIcon focused={active||filled} > <i className={`fas fa-${icon} fa-1x`} ></i>  </FloatIcon>}
+    {!loading && icon && <FloatIcon focused={active||filled} > <i className={`fas fa-${icon}`} ></i>  </FloatIcon>}
     <LoadingWrapper > 
       <LoadingIndicator active={loading} small /> 
     </LoadingWrapper>
@@ -59,10 +55,10 @@ const renderField = ({
       ((error && <Error>{error}</Error>) ||
         (warning && <Warning>{warning}</Warning>))}
     
-    {searchResults &&  <SearchResultsWrapper expanded={active && searchResults.length > 0} >
+    {searchResults &&  <SearchResultsWrapper  expanded={active && searchResults.length > 0} >
           {searchResults.map(result=>
               <SearchResult key={result._id} > <span style={{flex:1}} >{result.name}</span> 
-              <Button size="s" disabled={rest.MAX_TOPICS_REACHED||rest.activeTopicIds.includes(result._id)} onClick={()=>onAddTopic({id:result._id, name:result.name})} >+</Button>
+              <Button size="s" disabled={rest.MAX_TOPICS_REACHED||rest.activeTopicIds.includes(result._id)} onClick={()=>{return onAddTopic({id:result._id, name:result.name})} } >+</Button>
               </SearchResult>
           )}
       </SearchResultsWrapper>

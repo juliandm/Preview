@@ -13,6 +13,5 @@ export default styled.a`
   padding: 3px;
   text-align: center;
   align-items:center;
-  line-height: 60px;
 
 `;

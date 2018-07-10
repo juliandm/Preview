@@ -4,19 +4,21 @@
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { LOAD_TOPICS, SEARCH } from './constants';
-import { topicLoaded, topicLoadingError, searchSuccess } from './actions';
+import { topicsLoaded, topicsLoadingError, searchSuccess } from './actions';
 import {mainApi} from "services"
 
 // import request from 'utils/request';
-import { makeSelectTopics, makeSelectSearchValue } from './selectors';
+import * as selectors from './selectors';
 import {topicDataConstructor} from "./constructors"
 import delay from "helpers/delay"
+import {convertTopicIdsToUrl} from "helpers/url"
+
 
 
 export function* getSearchResults() {
   console.log("SAGA SEARCH")
   // const searchResults = [{"id": "react",value: "react", type:"topic"},{"id": "fsd","value":"FSD", type:"topic"}]
-  const searchValue = yield select(makeSelectSearchValue())
+  const searchValue = yield select(selectors.makeSelectSearchValue())
   const searchResults = yield call(mainApi,{method: "GET",path:["search","topics",searchValue]})
   console.log(searchResults)
   yield put(searchSuccess(searchResults));
@@ -24,26 +26,24 @@ export function* getSearchResults() {
 
 export function* getTopicData() {
   // Select Topic Names from store
-  const topics = yield select(makeSelectTopics());
-console.log("LOAD SAGA")
+  
+  const topicIds = yield select(selectors.makeSelectTopicIds());
+  
+  console.log("LOAD SAGA", topicIds)   
+
   try {
-    for (let topic of topics) {
-      //Attributes
-      if (topic.attributePairs.length === 0) {
-        //Simulate topics on server
-        const topicData = yield call(mainApi,{method: "GET",path:["topics",topic.id]})
-        console.log(topicData)
-        if (topicData) {
-          yield put(topicLoaded({id:topic.id,topic:{...topicData} }));
-        } else {
-          yield put(topicLoadingError(topic.id,"No attributes yet"));
-        }
+      const topicData = yield call(mainApi,{method: "GET",path:["topics"], query: {"t":topicIds}})
+      console.log(topicData)
+      if (topicData) {
+        yield put(topicsLoaded({...topicData }));
+
+      } else {
+        yield put(topicsLoadingError(topic.id,"Nothing found"));
       }
-    }
 
   } catch (err) {
     for (let topic of topics) {
-      yield put(topicLoadingError(topic.id,"Failed to fetch"));
+      yield put(topicsLoadingError(topic.id,"Failed to fetch"));
     }
   }
 }

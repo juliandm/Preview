@@ -35,12 +35,14 @@ function explorerPageReducer(state = initialState(), action) {
     console.log(action.fields)
       return {
         ...state,
+        changed: true,
         topics: [...state.topics, topicConstructor({...action.fields})],
       }    
     case REMOVE_TOPIC:
       return {
         ...state,
-        topics: state.topics.filter((topic,i) => topic.id !== action.id)
+        changed: true,        
+        topics: state.topics.filter((topic,i) => topic._id !== action.id)
       }
       
     case LOAD_TOPICS:
@@ -48,25 +50,25 @@ function explorerPageReducer(state = initialState(), action) {
     
       return {
         ...state,
-        topics: state.topics.map(
-          (topic, i) => topic.attributePairs.length === 0 ? {...topic, loading: true,error:false } : topic
-        ),
+        loading: true,
       }    
     case LOAD_TOPIC_SUCCESS:
     console.log("Succ")
     
       return {
         ...state,
-        topics: state.topics.map(
-          (topic, i) => topic.id === action.id ? {...topic,...action.topic, loading: false, changed:false} : topic
-        )
+        topics: action.topics,
+        info: action.info,
+        tree: action.tree,
+        loading:false,
+        changed: false,        
+        attributes: action.attributes
       }         
     case LOAD_TOPIC_ERROR:
       return {
         ...state,
-        topics: state.topics.map(
-          (topic, i) => i === action.position ? {...topic, loading: false, error:action.error, changed:false} : topic
-        ),
+        loading: false,
+        error: action.error
       }         
       
     default:
