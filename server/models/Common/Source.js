@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 module.exports.Source =  mongoose.model('Source', new Schema({
   name: String,
-  url: String,  
+  landing: {type: Schema.Types.ObjectId, ref: 'Url'},  
 }, {
   timestamps: {
     createdAt: 'createdAt',

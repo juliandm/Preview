@@ -8,6 +8,7 @@ var TopicSchema = new Schema({
   stats: {type: Schema.Types.ObjectId, ref: 'Stats'},
   links: String,
   attributePairs: [{type: Schema.Types.ObjectId, ref: 'AttributePair'}],
+  elements: [{type: Schema.Types.ObjectId, ref: 'Topic'}],
   procons: [{type: Schema.Types.ObjectId, ref: 'Procon'}],
   description: {type: Schema.Types.ObjectId, ref: 'Description'},
   users: [{type: Schema.Types.ObjectId, ref: 'User'}]

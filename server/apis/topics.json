@@ -1,0 +1,43 @@
+{
+    "topics": [
+      {
+        "name": "razor",
+        "attributePairs": [
+          {
+            "name": "End Costumer",
+            "value": "private"
+          },
+          {
+            "name": "Power Supply",
+            "value": "cable"
+          },
+          {
+            "name": "Room",
+            "value": "bathroom",
+            "parent"
+          }
+        ]
+      },
+      {
+        "name": "TV",
+        "attributePairs": [
+          {
+            "name": "End Costumer",
+            "value": "private"
+          },
+          {
+            "name": "End Costumer",
+            "value": "public"
+          },
+          {
+            "name": "Power Supply",
+            "value": "cable"
+          },
+          {
+            "name": "Room",
+            "value": "Living Room"
+          }
+        ]
+      }
+    ]
+  }

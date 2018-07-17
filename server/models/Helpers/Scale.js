@@ -2,9 +2,8 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
  
 
-module.exports.Unit =  mongoose.model('Unit', new Schema({
-  description: String,
+module.exports.Scale =  mongoose.model('Scale', new Schema({
+  name: String,
   shortName: String,
-  fracture: Number
 }))
 

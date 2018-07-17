@@ -2,9 +2,9 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
  
 
-module.exports.Source =  mongoose.model('Source', new Schema({
-  name: String,
-  url: String,  
+module.exports.Url =  mongoose.model('Url', new Schema({
+  value: String,
+  active: {type: Boolean, default: true}
 }, {
   timestamps: {
     createdAt: 'createdAt',

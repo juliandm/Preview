@@ -1,155 +1,184 @@
-**NOTE: We're working hard to get a new release out that includes React v16, Enzyme v3, Webpack v4, Redux v4, and more. Please bear with us while we wait for some external dependency issues to clear and can get these updates fully vetted and released. Please feel free to use the dev branch if you'd like to use upgraded features, but know that it still hasn't been released.**
+# Class
+* Contains all skeletons of functions & attributes which are shared by several topics. 
 
-<img src="https://raw.githubusercontent.com/react-boilerplate/react-boilerplate-brand/master/assets/banner-metal-optimized.jpg" alt="react boilerplate banner" align="center" />
+* When a class is assigned to a new Topic, this Topic automatically inherits all skeletons of functions & attributes of the class.
 
-<br />
+* Has to inherit from another Class
 
-<div align="center"><strong>Start your next react project in seconds</strong></div>
-<div align="center">A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices</div>
+# AttributePair (key, value)
+value one of nominal, rational, boolean
+# Function (source, sink, relationship)
+Connects two topics
 
-<br />
+# Topic
+The main entity to store information around a topic. 
 
-<div align="center">
-  <!-- Dependency Status -->
-  <a href="https://david-dm.org/react-boilerplate/react-boilerplate">
-    <img src="https://david-dm.org/react-boilerplate/react-boilerplate.svg" alt="Dependency Status" />
-  </a>
-  <!-- devDependency Status -->
-  <a href="https://david-dm.org/react-boilerplate/react-boilerplate#info=devDependencies">
-    <img src="https://david-dm.org/react-boilerplate/react-boilerplate/dev-status.svg" alt="devDependency Status" />
-  </a>
-  <!-- Build Status -->
-  <a href="https://travis-ci.org/react-boilerplate/react-boilerplate">
-    <img src="https://travis-ci.org/react-boilerplate/react-boilerplate.svg" alt="Build Status" />
-  </a>
-  <!-- Test Coverage -->
-  <a href="https://coveralls.io/r/react-boilerplate/react-boilerplate">
-    <img src="https://coveralls.io/repos/github/react-boilerplate/react-boilerplate/badge.svg" alt="Test Coverage" />
-  </a>
-</div>
-<div align="center">
-    <!-- Backers -->
-  <a href="#backers">
-    <img src="https://opencollective.com/react-boilerplate/backers/badge.svg" alt="Backers" />
-  </a>
-      <!-- Sponsors -->
-  <a href="#sponsors">
-    <img src="https://opencollective.com/react-boilerplate/sponsors/badge.svg" alt="Sponsors" />
-  </a>
-  <a href="http://thinkmill.com.au/?utm_source=github&utm_medium=badge&utm_campaign=react-boilerplate">
-    <img alt="Supported by Thinkmill" src="https://thinkmill.github.io/badge/heart.svg" />
-  </a>
-  <!-- Gitter -->
-  <a href="https://gitter.im/mxstbr/react-boilerplate">
-    <img src="https://camo.githubusercontent.com/54dc79dc7da6b76b17bc8013342da9b4266d993c/68747470733a2f2f6261646765732e6769747465722e696d2f6d78737462722f72656163742d626f696c6572706c6174652e737667" alt="Gitter Chat" />
-  </a>
-</div>
+## Structure
 
-<br />
+* Theory
+  * Sum Up
+    * Definiton (Text generated from attributes, functions, parent Topics, Partitions)
+    * Categories
+      * History
+      * Criticism
+    * Is & Why Attributes/Functions
+    * 
+  * Parent Classes (from which classes does it inherit)
+  * Key Words (Words which are in the Definition and are not a Function or Parent Class)
+  * Attributes (what attributes define the topics)
+    * Normal Attribute
+    * Copied Attribute from Class  
+    * Copied Attribute from Element
+    * Special Attribute (optional)
+      * Why Attribute
+  * Functions (What is the connection with other Topics?) 
+    * Normal Function (If this is Leaf Child)
+    * Copied Function from Class      
+    * Copied Function from Element (functions from children get also displayed here)
+    * Special Function (optional)
+      * Why Function
+      * Pendant (x to y like a to b)
+      * Opposite (to x in )
+  * Partitions: (Array of unique Attributes who partition the Topic in different ways and has Topics as Values, default Name is elements)
+    * Attribute (Elements || other categorization)
+      * AttributeValue (Topic)
+      * ...
+    * ...
+* Practice
+  * Examples 
+    * Example == Object of Instance
+* Other Attributes
 
-<div align="center">
-  <sub>Created by <a href="https://twitter.com/mxstbr">Max Stoiber</a> and maintained with ❤️ by an amazing <a href="https://github.com/orgs/react-boilerplate/teams/core">team of developers</a>.</sub>
-</div>
+## Example
 
-## Features
+* Database
+  * Theory
+    * Functions
+      * Element
+        * Function (AttrPair as Function Value)
+      * ...
+    * Categories (unique Attributes who partition the Topic in different ways)
+      * Attribute 
+        * AttributeValue
+        * ...
+      * ...
+    * Elements
+      * DMS
+      * DB engerer Sinn
+  * Practice
+    * Examples
+      * 
+  * Other Attributes
 
-<dl>
-  <dt>Quick scaffolding</dt>
-  <dd>Create components, containers, routes, selectors and sagas - and their tests - right from the CLI!</dd>
+# Function
 
-  <dt>Instant feedback</dt>
-  <dd>Enjoy the best DX (Developer eXperience) and code your app at the speed of thought! Your saved changes to the CSS and JS are reflected instantaneously without refreshing the page. Preserve application state even when you update something in the underlying code!</dd>
+## Structure
 
-  <dt>Predictable state management</dt>
-  <dd>Unidirectional data flow allows for change logging and time travel debugging.</dd>
+* Input Variables
+* Output Variables
+* inverse
 
-  <dt>Next generation JavaScript</dt>
-  <dd>Use template strings, object destructuring, arrow functions, JSX syntax and more, today.</dd>
+## Types
 
-  <dt>Next generation CSS</dt>
-  <dd>Write composable CSS that's co-located with your components for complete modularity. Unique generated class names keep the specificity low while eliminating style clashes. Ship only the styles that are on the page for the best performance.</dd>
+### General
+* Is ()
+* Save ()
+* Provide ()
+* Solve (finds a solution for a problem)
+* decide (decide between alternatives)
+### Numeric
+* increase
+* decrease 
 
-  <dt>Industry-standard routing</dt>
-  <dd>It's natural to want to add pages (e.g. `/about`) to your application, and routing makes this possible.</dd>
+### Math (LateX and other languages as inspiration)
+* add
+* subtract
+* divide
+* multiply 
 
-  <dt>Industry-standard i18n internationalization support</dt>
-  <dd>Scalable apps need to support multiple languages, easily add and support multiple languages with `react-intl`.</dd>
+### Boolean
 
-  <dt>Offline-first</dt>
-  <dd>The next frontier in performant web apps: availability without a network connection from the instant your users load the app.</dd>
+# Reasons for the Website
 
-  <dt>SEO</dt>
-  <dd>We support SEO (document head tags management) for search engines that support indexing of JavaScript content. (eg. Google)</dd>
-</dl>
+Saving Information in a 
 
-But wait... there's more!
+## Problems
 
-* _The best test setup:_ Automatically guarantee code quality and non-breaking
-  changes. (Seen a react app with 99% test coverage before?)
-* _Native web app:_ Your app's new home? The home screen of your users' phones.
-* _The fastest fonts:_ Say goodbye to vacant text.
-* _Stay fast_: Profile your app's performance from the comfort of your command
-  line!
-* _Catch problems:_ AppVeyor and TravisCI setups included by default, so your
-  tests get run automatically on Windows and Unix.
+* Redundant Information 
+* Accessibility & Presence of any information is no problem, whereas the context is
 
-There’s also a <a href="https://vimeo.com/168648012">fantastic video</a> on how to structure your React.js apps with scalability in mind. It provides rationale for the majority of boilerplate's design decisions.
 
-<sub><i>Keywords: React.js, Redux, Hot Reloading, ESNext, Babel, react-router, Offline First, ServiceWorker, `styled-components`, redux-saga, FontFaceObserver</i></sub>
+## Principles
 
-## Quick start
+* fast to grasp
+  * What is it?: lightweight and short definitions
+  * Why is it relevant?: reason for existance of every topic is made clear initially
+  * How does it work?: Examples match structure of their class, parallels to the definition is always visible. Jumping between inducing and deducing becomes clear immediately
 
-1.  Clone this repo using `git clone --depth=1 https://github.com/react-boilerplate/react-boilerplate.git`
-2.  Move to the appropriate directory: `cd react-boilerplate`.<br />
-3.  Run `npm run setup` in order to install dependencies and clean the git repo.<br />
-    _We auto-detect `yarn` for installing packages by default, if you wish to force `npm` usage do: `USE_YARN=false npm run setup`_<br />
-    _At this point you can run `npm start` to see the example app at `http://localhost:3000`._
-4.  Run `npm run clean` to delete the example app.
+* practical
+  * DRY: In each topic exists only one definition for every language
+  * On point: Most basic vocabulary, no fancy technical terms
 
-Now you're ready to rumble!
+* structured
+  * Every Entitity down to a single word is nested in a massive ontology in the background
+  * Every Entity can be compared, visualized or processed in any desired way
+  
+* automized
+  * visualization, hierarchy trees and text definitions get generated automatically
+  * Inheritance of Classes
 
-> Please note that this boilerplate is **production-ready and not meant for beginners**! If you're just starting out with react or redux, please refer to https://github.com/petehunt/react-howto instead. If you want a solid, battle-tested base to build your next product upon and have some experience with react, this is the perfect start for you.
+* free
+  * from scientists for scientists, in exchange for a small favour for us to keep the servers running,
+  the database is yours
 
-## Documentation
+Want to become an author? We hire
 
-* [**The Hitchhikers Guide to `react-boilerplate`**](docs/general/introduction.md): An introduction for newcomers to this boilerplate.
-* [Overview](docs/general): A short overview of the included tools
-* [**Commands**](docs/general/commands.md): Getting the most out of this boilerplate
-* [Testing](docs/testing): How to work with the built-in test harness
-* [Styling](docs/css): How to work with the CSS tooling
-* [Your app](docs/js): Supercharging your app with Routing, Redux, simple
-  asynchronicity helpers, etc.
-* [**Troubleshooting**](docs/general/gotchas.md): Solutions to common problems faced by developers.
+## Motivation
 
-## Supporters
+### History of Information Exchange
 
-This project would not be possible without the support by these amazing folks. [**Become a sponsor**](https://opencollective.com/react-boilerplate) to get your company in front of thousands of engaged react developers and help us out!
+* Regarding only one to one relationships
+* Precision of Information increases in each step
+1. Gestures/Facial Expression 
+2. Speech 
+3. Writing & Reading & Listening => Uncoupling of information from source => one carrier, still bound to location and time
+  1. Saving possible
+4. Internet => Uncoupling carrier from location and time
+  1. Oral and visual senses can be transmitted, still lacking with feeling and smelling 
+  4. Rapid Exchange = Almost uncoupling information from carrier, Source === Sink
+  5. Filtering  = Only relevant information is transmitted
+5. Processing => Uncoupling information from structure
+  1. (Analysing, Interpreting, Predicting, Translating) Sent Information is has no distinct form and  is adapting to its location
+  2. No overhead: Information exists in it's rawest and most relevant form
 
-<a href="https://opencollective.com/react-boilerplate/bronze-sponsor/0/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/bronze-sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/bronze-sponsor/1/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/bronze-sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/bronze-sponsor/2/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/bronze-sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/bronze-sponsor/3/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/bronze-sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/bronze-sponsor/4/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/bronze-sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/bronze-sponsor/5/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/bronze-sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/bronze-sponsor/6/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/bronze-sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/bronze-sponsor/7/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/bronze-sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/bronze-sponsor/8/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/bronze-sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/bronze-sponsor/9/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/bronze-sponsor/9/avatar.svg"></a>
 
----
+### Comparison of Natural Language with Maths
+https://link.springer.com/chapter/10.1007/978-3-658-19567-0_8
 
-<a href="https://opencollective.com/react-boilerplate/backer/0/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/backer/0/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/backer/1/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/backer/1/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/backer/2/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/backer/2/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/backer/3/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/backer/3/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/backer/4/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/backer/4/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/backer/5/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/backer/5/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/backer/6/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/backer/6/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/backer/7/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/backer/7/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/backer/8/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/backer/8/avatar.svg"></a>
-<a href="https://opencollective.com/react-boilerplate/backer/9/website" target="_blank"><img src="https://opencollective.com/react-boilerplate/backer/9/avatar.svg"></a>
+Natural Language <---> Maths
+Smallest entities: no combination, may be a combination ("busdriver") <---> no combination
+Variables/Placeholders: A combination of entities ("the above mentioned patterns..") <---> one predefined entity ("x = 45")
+Semantic connection between entities: combination (Verbs/Conjunctions) <---> combination (Operators)
+Grouping: combination (Sentences, Paragraphs) <---> combination (Formula)
 
-## License
+Optimized Transfer Channel: Speech <---> Text
+Transfer Size (s): comforteably sliced chunks (~small) with Repetitions, Variance 
+<---> most efficient Size (whole Groups/Formulas) and no redundancy (~large) 
+Transfer Time (t): slow Pace with Breaks <---> most efficient Speed (~infinity) without breaks/condensed
+Transfer Speed (v): "Slow" <---> "fast"
 
-This project is licensed under the MIT license, Copyright (c) 2017 Maximilian
-Stoiber. For more information see `LICENSE.md`.
+Information intake for human learners: High (Can be grasped in most cases initially) <---> Low (Has to be repeated manually to understand)
+Information intake for AI learners: Low (Has to filter out redundancies, evaluate meaning and weight Importance of entities itself) <---> High (necessary information is accessible and genuine with minimal preprocessing)
+Reusability, reprocessing (visualizing) and integration: Low <---> High
+
+### Conclusion
+
+In order to understand information for the average human learner* the most favourable shape is in form of natural text. However to save and reuse information, to visualize it, to evaluate all possible connections, or for an intelligent machine to learn efficiently, this information needs to be destructured to smallest bits.
+
+What this project tries to achieve is to create a database which contains information along three maximized principles:
+* destructured
+* integrated
+* DRY
+
+
+Goal: Transmission/Saving Information in small chunks and at slow Speed and with repetitions/redundancy (Reading/Talking)  <---> Transmission/Saving of Information in big chunks at high speed with no redundancy
