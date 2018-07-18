@@ -1,21 +1,16 @@
-1. # Class
+# 1. Class
+## 1.1 Definition
 * Contains all skeletons of functions & attributes which are shared by several topics. 
 * When a class is assigned to a new Topic, this Topic has to fill the skeleton of functions & attributes of the class.
 * Has to inherit from another Class
-
-1. ##  Structure
-
+## 1.2 Structure
 * Attributes (Everything that is compareable)
 * Functions
 
-# 1. AttributePair (key, value)
-value one of nominal, rational, boolean
-
-# 1. Topic
+# 2. Topic
+## 2.1 Definition
 The main entity to store information around a topic. 
-
-## 1. Structure
-
+## 2.2 Structure
 * Theory
   * Sum Up
     * Definiton (Text generated from attributes, functions, parent Topics, Partitions)
