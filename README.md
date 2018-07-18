@@ -1,16 +1,21 @@
-# 1. Class
-## 1.1 Definition
-* Contains all skeletons of functions & attributes which are shared by several topics. 
-* When a class is assigned to a new Topic, this Topic has to fill the skeleton of functions & attributes of the class.
-* Has to inherit from another Class
-## 1.2 Structure
+# Datatypes
+## 1. Class
+* Contains the shape of theory constructed with a combination of other Classes with functions, Conjunctions and AttributePairs which are equal among Topics.
+* Attributes, whose values change among Topics can be also specified as a skeleton for the comparison within the group
+* Classes have to inherit from another Class
+### Structure
 * Attributes (Everything that is compareable)
-* Functions
-
-# 2. Topic
-## 2.1 Definition
+* Definition: Combination of the following
+  * Functions
+  * AttributePair
+  * Conjunction
+  * Classes
+### Examples
+* Make or buy decision ( Individual theoretical Action > Decision)
+* 
+## 2. Topic
 The main entity to store information around a topic. 
-## 2.2 Structure
+### Structure
 * Theory
   * Sum Up
     * Definiton (Text generated from attributes, functions, parent Topics, Partitions)
@@ -44,36 +49,51 @@ The main entity to store information around a topic.
   * Examples 
     * Example == Object of Instance
 * Other Attributes
+## 3. Group
+Groups Similar Topics together, which share at least one Attribute. A Group is automatically created for every Class.
+### Examples
+* MERN Stack
+* Webframeworks (created from Class Webframework)
+## 4. Function
+Connects Classes with each other
+### Structure
+* Input: Class
+* Output: Class
+* combination: Conjunction + Function
+* inverse: Function
 
-# Function
+### Types
 
-## Structure
+* General
+    * Is ()
+    * Save ()
+    * Provide ()
+    * Solve (finds a solution for a problem)
+    * decide (decide between alternatives)
+* Numeric
+    * increase
+    * decrease 
 
-* Input Variables
-* Output Variables
-* inverse
+* Math (LateX and other languages as inspiration)
+    * add
+    * subtract
+    * divide
+    * multiply 
+* Boolean
+    * and
+    * or
+    * not
+    
+## 4. Conjunction
+These are the Interfaces between Classes, Functions and AttributePairs. All combinations are possible:
+* Class + Class
+* Class + Function
+* Class + AttributePair
+* Function + Function
+* Function + AttributePair
+* AttributePair + AttributePair
 
-## Types
-
-### General
-* Is ()
-* Save ()
-* Provide ()
-* Solve (finds a solution for a problem)
-* decide (decide between alternatives)
-### Numeric
-* increase
-* decrease 
-
-### Math (LateX and other languages as inspiration)
-* add
-* subtract
-* divide
-* multiply 
-
-### Boolean
-
-# Reasons for the Website
+# Motivation for the Website
 
 ## Problems
 
