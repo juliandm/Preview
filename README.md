@@ -105,33 +105,36 @@ Saving Information in a
 ## Problems
 
 * Redundant Information 
-    * Accessibility & Presence of any information is no problem, whereas the context is
+* Accessibility & Presence of any information is no problem, whereas the context is
 
 
 ## Principles
 
 * fast to grasp
-    * What is it?: lightweight and short definitions
-    * Why is it relevant?: reason for existance of every topic is made clear initially
-    * How does it work?: Examples match structure of their class, parallels to the definition is always visible. Jumping between inducing and deducing becomes clear immediately
-* practical
-  * DRY: In each topic exists only one definition for every language
-  * On point: Most basic vocabulary, no fancy technical terms
-* (de-)structured
-  * Every Entitity down to a single word is nested/connected in a massive ontology in the background
-* versatile
-  * Every Entity can be compared, visualized or processed in any desired way
-  * No restriction to one-dimensional syntax of a natural language
-* automized
-  * visualization, hierarchy trees and text definitions get generated automatically
-  * Inheritance of Classes
-* fun
-  * drawing definitions is 
-* free
-  * from scientists for scientists, in exchange for a small favour for us to keep the servers running,
-  the database is yours
+    * on point visual definitions
+    * reason for existance of every topic is made clear initially
+    * Class - Topic approach simplifies jumping between theoretical knowledge (Definition) and empirical knowledge(Examples)  
 
-Want to become an author? We hire
+* DRY and on point
+    * In each topic exists only one definition for every language
+    * Most basic vocabulary, no fancy technical terms
+* (de-)structured
+    * Every Entitity down to a single word is nested/connected in a massive ontology in the background
+* versatile
+    * Every Entity can be compared, visualized or processed in any desired way
+    * No restriction to one-dimensional and redundant syntax of a natural language
+* automized
+    * visualization, hierarchy trees and text definitions get generated automatically
+    * Inheritance of Classes
+* fun
+    * focusing on single elements of a definition and drawing them is most likely a better experience than cramming everything in one sentence
+* open source
+    * from scientists for scientists, in exchange for a small favour for us to keep the servers running,
+    the database is yours
+    * there are many ways to contribute, beeing the most obvious: extending the database. Please refer to our guidelines if you want to become a writer
+
+Want to become an author? Start here
+Still not convinced that this should be thing? Write us
 
 ## Motivation
 
