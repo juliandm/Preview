@@ -79,6 +79,8 @@ Connects Classes with each other
     * subtract
     * divide
     * multiply 
+* Causal
+    * causes/is caused by
 * Boolean
     * and
     * or
