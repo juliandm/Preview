@@ -105,15 +105,15 @@ Saving Information in a
 ## Problems
 
 * Redundant Information 
-  * Accessibility & Presence of any information is no problem, whereas the context is
+    * Accessibility & Presence of any information is no problem, whereas the context is
 
 
 ## Principles
 
 * fast to grasp
-  * What is it?: lightweight and short definitions
-  * Why is it relevant?: reason for existance of every topic is made clear initially
-  * How does it work?: Examples match structure of their class, parallels to the definition is always visible. Jumping between inducing and deducing becomes clear immediately
+    * What is it?: lightweight and short definitions
+    * Why is it relevant?: reason for existance of every topic is made clear initially
+    * How does it work?: Examples match structure of their class, parallels to the definition is always visible. Jumping between inducing and deducing becomes clear immediately
 * practical
   * DRY: In each topic exists only one definition for every language
   * On point: Most basic vocabulary, no fancy technical terms
