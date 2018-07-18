@@ -105,7 +105,7 @@ Saving Information in a
 ## Problems
 
 * Redundant Information 
-* Accessibility & Presence of any information is no problem, whereas the context is
+  * Accessibility & Presence of any information is no problem, whereas the context is
 
 
 ## Principles
