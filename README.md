@@ -157,14 +157,14 @@ Still not convinced that this should be thing? Write us
 
 ### Comparison of Natural Language with Maths
 https://link.springer.com/chapter/10.1007/978-3-658-19567-0_8
+
 Type | Natural Language| Maths
 --- | --- | ---
 Smallest entities | no combination, may be a combination ("busdriver") | no combination
 Variables/Placeholders | A combination of entities ("the above mentioned patterns..") | one predefined entity ("x = 45") 
-Semantic connection between entities | combination (Verbs/Conjunctions) | combination (Operators) |
-Grouping | combination (Sentences, Paragraphs) | combination (Formula) |
-Optimized Transfer Channel | Speech | Text |
-Optimized Transfer Channel | Speech | Text |
+Semantic connection between entities | combination (Verbs/Conjunctions) | combination (Operators)
+Grouping | combination (Sentences, Paragraphs) | combination (Formula)
+Optimized Transfer Channel | Speech | Text
 Transfer Size (s) | comforteably sliced chunks (~small) with Repetitions, Variance |  most efficient Size (whole Groups/Formulas) and no redundancy (~large) 
 Transfer Time (t) | slow Pace with Breaks | most efficient Speed (~infinity) without breaks/condensed
 Transfer Speed (v) | "Slow" | "fast"
