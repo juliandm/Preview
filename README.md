@@ -1,19 +1,20 @@
-# Class
+# 1. Class
 * Contains all skeletons of functions & attributes which are shared by several topics. 
-
-* When a class is assigned to a new Topic, this Topic automatically inherits all skeletons of functions & attributes of the class.
-
+* When a class is assigned to a new Topic, this Topic has to fill the skeleton of functions & attributes of the class.
 * Has to inherit from another Class
 
-# AttributePair (key, value)
-value one of nominal, rational, boolean
-# Function (source, sink, relationship)
-Connects two topics
+## 1. Structure
 
-# Topic
+* Attributes (Everything that is compareable)
+* Functions
+
+# 1. AttributePair (key, value)
+value one of nominal, rational, boolean
+
+# 1. Topic
 The main entity to store information around a topic. 
 
-## Structure
+## 1. Structure
 
 * Theory
   * Sum Up
@@ -49,27 +50,6 @@ The main entity to store information around a topic.
     * Example == Object of Instance
 * Other Attributes
 
-## Example
-
-* Database
-  * Theory
-    * Functions
-      * Element
-        * Function (AttrPair as Function Value)
-      * ...
-    * Categories (unique Attributes who partition the Topic in different ways)
-      * Attribute 
-        * AttributeValue
-        * ...
-      * ...
-    * Elements
-      * DMS
-      * DB engerer Sinn
-  * Practice
-    * Examples
-      * 
-  * Other Attributes
-
 # Function
 
 ## Structure
@@ -100,13 +80,10 @@ The main entity to store information around a topic.
 
 # Reasons for the Website
 
-Saving Information in a 
-
 ## Problems
 
 * Redundant Information 
 * Accessibility & Presence of any information is no problem, whereas the context is
-
 
 ## Principles
 
