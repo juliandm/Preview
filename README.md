@@ -110,7 +110,7 @@ Saving Information in a
 
 ## Principles
 
-* fast to grasp
++ fast to grasp
   * What is it?: lightweight and short definitions
   * Why is it relevant?: reason for existance of every topic is made clear initially
   * How does it work?: Examples match structure of their class, parallels to the definition is always visible. Jumping between inducing and deducing becomes clear immediately
@@ -119,13 +119,19 @@ Saving Information in a
   * DRY: In each topic exists only one definition for every language
   * On point: Most basic vocabulary, no fancy technical terms
 
-* structured
-  * Every Entitity down to a single word is nested in a massive ontology in the background
+* (de-)structured
+  * Every Entitity down to a single word is nested/connected in a massive ontology in the background
+
+* versatile
   * Every Entity can be compared, visualized or processed in any desired way
+  * No restriction to one-dimensional syntax of a natural language
   
 * automized
   * visualization, hierarchy trees and text definitions get generated automatically
   * Inheritance of Classes
+
+* fun
+  * drawing definitions is 
 
 * free
   * from scientists for scientists, in exchange for a small favour for us to keep the servers running,
@@ -154,22 +160,21 @@ Want to become an author? We hire
 
 ### Comparison of Natural Language with Maths
 https://link.springer.com/chapter/10.1007/978-3-658-19567-0_8
+Type | Natural Language| Maths
+--- | --- | ---
+Smallest entities | no combination, may be a combination ("busdriver") | no combination
+Variables/Placeholders | A combination of entities ("the above mentioned patterns..") | one predefined entity ("x = 45") 
+Semantic connection between entities | combination (Verbs/Conjunctions) | combination (Operators) |
+Grouping | combination (Sentences, Paragraphs) | combination (Formula) |
+Optimized Transfer Channel | Speech | Text |
+Optimized Transfer Channel | Speech | Text |
+Transfer Size (s) | comforteably sliced chunks (~small) with Repetitions, Variance |  most efficient Size (whole Groups/Formulas) and no redundancy (~large) 
+Transfer Time (t) | slow Pace with Breaks | most efficient Speed (~infinity) without breaks/condensed
+Transfer Speed (v) | "Slow" | "fast"
+Information intake for human learners | High (Can be grasped in most cases initially) | Low (Has to be repeated manually to understand)
+Information intake for AI learners | Low (Has to filter out redundancies, evaluate meaning and weight Importance of entities itself) | High (necessary information is accessible and genuine with minimal preprocessing)
+Reusability, reprocessing (visualizing) and integration | Low | High
 
-Natural Language <---> Maths
-Smallest entities: no combination, may be a combination ("busdriver") <---> no combination
-Variables/Placeholders: A combination of entities ("the above mentioned patterns..") <---> one predefined entity ("x = 45")
-Semantic connection between entities: combination (Verbs/Conjunctions) <---> combination (Operators)
-Grouping: combination (Sentences, Paragraphs) <---> combination (Formula)
-
-Optimized Transfer Channel: Speech <---> Text
-Transfer Size (s): comforteably sliced chunks (~small) with Repetitions, Variance 
-<---> most efficient Size (whole Groups/Formulas) and no redundancy (~large) 
-Transfer Time (t): slow Pace with Breaks <---> most efficient Speed (~infinity) without breaks/condensed
-Transfer Speed (v): "Slow" <---> "fast"
-
-Information intake for human learners: High (Can be grasped in most cases initially) <---> Low (Has to be repeated manually to understand)
-Information intake for AI learners: Low (Has to filter out redundancies, evaluate meaning and weight Importance of entities itself) <---> High (necessary information is accessible and genuine with minimal preprocessing)
-Reusability, reprocessing (visualizing) and integration: Low <---> High
 
 ### Conclusion
 
