@@ -1,9 +1,9 @@
-# 1. Class
+1. # Class
 * Contains all skeletons of functions & attributes which are shared by several topics. 
 * When a class is assigned to a new Topic, this Topic has to fill the skeleton of functions & attributes of the class.
 * Has to inherit from another Class
 
-## 1. Structure
+1. ##  Structure
 
 * Attributes (Everything that is compareable)
 * Functions
