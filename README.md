@@ -1,12 +1,15 @@
+
 # Datatypes
 ## 1. Class / Topic
 * Contains the shape of theory constructed with a combination of 
 * Descriptors, whose values change among Topics can be also specified
 * Classes have to inherit from another Class
-* Most Outermost Classes, which are not inherited by another Class are called Topics. They are the most practical while Classes which are high up the Hierarchy are the most abstract.
-* 
-### Structure
+* Most Outermost Classes, which are not inherited by another Class are called Topics. They are the most close to real life while Classes which are high up the Hierarchy are the most abstract.
+* Relations depict the Connection of this Class with its Attributes to other Classes with its Attributes which are not in the same Family
+* Classes which can be reached through parents of another class are called to be in the same family 
 
+### Structure
+* Parents
 * Attributes (what descriptors define the topics)
     * Skeleton Attribute: Copied from Parent Class 
     * Extended Attribute: differentiates this Class from the parent
@@ -15,7 +18,7 @@
         * Normal Attribute: Describes a characteristic of this Class, which is not linked with another Class or Attribute   
 * Group: Defines the name of the Group, in case it is not a Topic
 ### Derived Data (external)
-* Visualization out of Combinations (Every Combination that includes this Class) 
+* Visualization out of Relations (Every Relation that includes this Class) 
 * Definition
 
 ### Examples
@@ -82,11 +85,11 @@ Consist of a Descriptor and a Value. Each Descriptor holds multiple Values on di
 ### Ordinal
 ### Nominal
 
-# 4. Combination
+# 4. Relation
 
 3 Tuple of either Class or Attribute which are connected by a function.
 The combination itself can be described with an Attribute.
-A Combination describes what (Class, Attribute) and how (Function) they are connected.
+A Relation describes what (Class, Attribute) and how (Function) they are connected.
 
 ### Structure
 * Input: Class, Attribute
