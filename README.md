@@ -1,66 +1,35 @@
 # Datatypes
-## 1. Class
-* Contains the shape of theory constructed with a combination of other Classes with functions, Conjunctions and AttributePairs which are equal among Topics.
-* Attributes, whose values change among Topics can be also specified as a skeleton for the comparison within the group
+## 1. Class / Topic
+* Contains the shape of theory constructed with a combination of 
+* Descriptors, whose values change among Topics can be also specified
 * Classes have to inherit from another Class
-### Structure
-* Attributes (Everything that is compareable)
-* Definition: Combination of the following
-  * Functions
-  * AttributePair
-  * Conjunction
-  * Classes
-### Examples
-* Make or buy decision ( Individual theoretical Action > Decision)
+* Most Outermost Classes, which are not inherited by another Class are called Topics. They are the most practical while Classes which are high up the Hierarchy are the most abstract.
 * 
-## 2. Topic
-The main entity to store information around a topic. 
 ### Structure
-* Theory
-  * Sum Up
-    * Definiton (Text generated from attributes, functions, parent Topics, Partitions)
-    * Categories
-      * History
-      * Criticism
-    * Is & Why Attributes/Functions
-    * 
-  * Parent Classes (from which classes does it inherit)
-  * Key Words (Words which are in the Definition and are not a Function or Parent Class)
-  * Attributes (what attributes define the topics)
-    * Normal Attribute
-    * Copied Attribute from Class  
-    * Copied Attribute from Element
-    * Special Attribute (optional)
-      * Why Attribute
-  * Functions (What is the connection with other Topics?) 
-    * Normal Function (If this is Leaf Child)
-    * Copied Function from Class      
-    * Copied Function from Element (functions from children get also displayed here)
-    * Special Function (optional)
-      * Why Function
-      * Pendant (x to y like a to b)
-      * Opposite (to x in )
-  * Partitions: (Array of unique Attributes who partition the Topic in different ways and has Topics as Values, default Name is elements)
-    * Attribute (Elements || other categorization)
-      * AttributeValue (Topic)
-      * ...
-    * ...
-* Practice
-  * Examples 
-    * Example == Object of Instance
-* Other Attributes
-## 3. Group
-Groups Similar Topics together, which share at least one Attribute. A Group is automatically created for every Class.
+
+* Attributes (what descriptors define the topics)
+    * Skeleton Attribute: Copied from Parent Class 
+    * Extended Attribute: differentiates this Class from the parent
+        * ProCon Attributes: At the end of a chain and/or equipped with positivity Scale
+        * Element Attribute: Value is a List of Partitions, Descriptor is the Name of the Partioning
+        * Normal Attribute: Describes a characteristic of this Class, which is not linked with another Class or Attribute   
+* Group: Defines the name of the Group, in case it is not a Topic
+### Derived Data (external)
+* Visualization out of Combinations (Every Combination that includes this Class) 
+* Definition
+
 ### Examples
-* MERN Stack
-* Webframeworks (created from Class Webframework)
-## 4. Function
-Connects Classes with each other
+* Topic: Make or buy decision, Parents: theoretical Action > Decision
+* Topic: MERN Stack
+* Class: Webframework, Group: Webframeworks
+
+## 2. Function
+Describes the kind of relation between two Classes or Attributes
+
 ### Structure
-* Input: Class
-* Output: Class
-* combination: Conjunction + Function
-* inverse: Function
+* functionName: String
+* forwardText: String
+* backwardText: String 
 
 ### Types
 
@@ -81,19 +50,61 @@ Connects Classes with each other
     * multiply 
 * Causal
     * causes/is caused by
+    * results in / is a Result of
+
 * Boolean
     * and
     * or
     * not
-    
-## 4. Conjunction
-These are the Interfaces between Classes, Functions and AttributePairs. All combinations are possible:
+* Compare Helper Function
+    * Pendant (x to y like a to b)
+    * Opposite (to x in )
+## 3. Attribute
+Consist of a Descriptor and a Value. Each Descriptor holds multiple Values on different Scales.
+
+### Example
+
+* Descriptor: Colour, Value: Blue, Scale: Ordinal
+* Descriptor: Weight, Value: 100, Scale: Ratio
+
+### 4.1 Descriptor
+### 4.2 Value
+### 4.3 Scale
+
+* can be either one of ratio, ordinal or nominal with descending interpretability.
+* to compare Descriptors of Topics, they have to match the Same Descriptor (Scale is optional)
+
+### Ratio
+
+* Unit (km, kg, s...)
+* positive_is_up (true, false)
+
+### Ordinal
+### Nominal
+
+# 4. Combination
+
+3 Tuple of either Class or Attribute which are connected by a function.
+The combination itself can be described with an Attribute.
+A Combination describes what (Class, Attribute) and how (Function) they are connected.
+
+### Structure
+* Input: Class, Attribute
+* Output: Class, Attribute
+* Function: Function
+* conjunction: String (And/or)
+* attributes: [Attribute]
+
+### Forms
+With descending Impact
+
 * Class + Class
-* Class + Function
-* Class + AttributePair
-* Function + Function
-* Function + AttributePair
-* AttributePair + AttributePair
+    * Price Cap solves Market Instability
+* Class + Attribute / Attribute + Class
+    * Price Cap solves Attribute of Market Instability
+    * Attribute of Price Cap solves Market Instability
+* Attribute + Attribute
+    * Attribute of Price Cap solves Attribute of Market Instability
 
 # Motivation for the Website
 
