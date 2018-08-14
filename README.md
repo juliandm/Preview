@@ -1,120 +1,30 @@
+# Motivation for the Project edurata
 
-# Datatypes
-## 1. Class / Topic
-* Contains the shape of theory constructed with a combination of 
-* Descriptors, whose values change among Topics can be also specified
-* Classes have to inherit from another Class
-* Most Outermost Classes, which are not inherited by another Class are called Topics. They are the most close to real life while Classes which are high up the Hierarchy are the most abstract.
-* Relations depict the Connection of this Class with its Attributes to other Classes with its Attributes which are not in the same Family
-* Classes which can be reached through parents of another class are called to be in the same family 
+## Problems, from worst to okay (regarding wikipedia)
 
-### Structure
-* Parents
-* Attributes (what descriptors define the topics)
-    * Skeleton Attribute: Copied from Parent Class 
-    * Extended Attribute: differentiates this Class from the parent
-        * ProCon Attributes: At the end of a chain and/or equipped with positivity Scale
-        * Element Attribute: Value is a List of Partitions, Descriptor is the Name of the Partioning
-        * Normal Attribute: Describes a characteristic of this Class, which is not linked with another Class or Attribute   
-* Group: Defines the name of the Group, in case it is not a Topic
-### Derived Data (external)
-* Visualization out of Relations (Every Relation that includes this Class) 
-* Definition
 
-### Examples
-* Topic: Make or buy decision, Parents: theoretical Action > Decision
-* Topic: MERN Stack
-* Class: Webframework, Group: Webframeworks
 
-## 2. Function
-Describes the kind of relation between two Classes or Attributes
+* Natural language is limited: "raw", unordered & static: 
+    * Processing barely possible
+        * i.e. no conversion between graphs and text, no autogeneration of lists or cross relations.
+    * author has a choice of few words to describe highly varying technical nuances
+        * context unclear
+            * content: some technical terms can't solely express what they are, what they include and how they are different from other terms. Reader is required to have context to deduce the main contents.
+            * purpose: Reader may understand what the term describes but not what it solves. Reader can't weigh the importance of a topic against others or understand why it exists.
+        * slightly varying definitions in different topics & languages, no centraliced "source of truth"
+    * Redundance
+        * The same content has to be repeated for every language
+        * connections between articles have to be manually declared in every connected article
+    * if there are visualizations, they are external pictures and not connected to the text 
+* Details but no context
+    * Negligence of "networking" the information and to put it in context. 
+* No line between theory and practice 
+    * Definitions (theory) sometimes poor and has to be supported by examples (practice) to express what it is. Ideally this should be separated.
+    * Slightly varying definitions due to 
+* No indivuality
+    * Different readers have different approaches, but the 
 
-### Structure
-* functionName: String
-* forwardText: String
-* backwardText: String 
-
-### Types
-
-* General
-    * Is ()
-    * Save ()
-    * Provide ()
-    * Solve (finds a solution for a problem)
-    * decide (decide between alternatives)
-* Numeric
-    * increase
-    * decrease 
-
-* Math (LateX and other languages as inspiration)
-    * add
-    * subtract
-    * divide
-    * multiply 
-* Causal
-    * causes/is caused by
-    * results in / is a Result of
-
-* Boolean
-    * and
-    * or
-    * not
-* Compare Helper Function
-    * Pendant (x to y like a to b)
-    * Opposite (to x in )
-## 3. Attribute
-Consist of a Descriptor and a Value. Each Descriptor holds multiple Values on different Scales.
-
-### Example
-
-* Descriptor: Colour, Value: Blue, Scale: Ordinal
-* Descriptor: Weight, Value: 100, Scale: Ratio
-
-### 4.1 Descriptor
-### 4.2 Value
-### 4.3 Scale
-
-* can be either one of ratio, ordinal or nominal with descending interpretability.
-* to compare Descriptors of Topics, they have to match the Same Descriptor (Scale is optional)
-
-### Ratio
-
-* Unit (km, kg, s...)
-* positive_is_up (true, false)
-
-### Ordinal
-### Nominal
-
-# 4. Relation
-
-3 Tuple of either Class or Attribute which are connected by a function.
-The combination itself can be described with an Attribute.
-A Relation describes what (Class, Attribute) and how (Function) they are connected.
-
-### Structure
-* Input: Class, Attribute
-* Output: Class, Attribute
-* Function: Function
-* conjunction: String (And/or)
-* attributes: [Attribute]
-
-### Forms
-With descending Impact
-
-* Class + Class
-    * Price Cap solves Market Instability
-* Class + Attribute / Attribute + Class
-    * Price Cap solves Attribute of Market Instability
-    * Attribute of Price Cap solves Market Instability
-* Attribute + Attribute
-    * Attribute of Price Cap solves Attribute of Market Instability
-
-# Motivation for the Website
-
-## Problems
-
-* Redundant Information 
-* Accessibility & Presence of any information is no problem, whereas the context is
+## Problems (regarding wikipedia)
 
 ## Principles
 
